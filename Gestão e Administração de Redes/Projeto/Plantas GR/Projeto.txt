@@ -1,0 +1,40 @@
+Projeto Lógico e Físico de Rede
+
+- Introdução
+- Topologia (projeto logico)
+- Protocolos e Endereçamento de Rede (descrição leve)
+- Roteamento
+- Autenticação e Segurança
+- Projeto Físico
+  * Quantidade de pontos de rede por sala
+  * Tipo de cabeamento utilizado
+  * Especificação dos equipamentos intermediários a serem utilizados
+  * Servidores de rede
+  * Acesso a Internet
+
+	* PREÇO PADRÃO POR PONTO: 100,00
+
+
+Equipe 1: 
+   Empresa de automação comercial, com sede em Curitiba/PR (aprox. 100 Funcionários) e fábrica em Pinhais/PR (aprox. 50 funcionários).
+   => 2 plantas
+   => Endereço de rede 192.168.10.0/24
+
+Equipe 2:
+   Escola de Informática com dois prédios em diferentes endereços de Curitiba/PR (aprox. 30 funcionários)      => 2 plantas
+   => Endereço de rede 172.16.0.0/16
+
+Equipe 3:
+   Centro Comercial em Curitiba/PR e escritório (aprox. 150 funcionários)
+   => 2 plantas
+   => Endereço de rede 10.0.0.0/8
+
+Equipe 4:
+   Escola de Informática com dois prédios em diferentes endereços de Curitiba/PR (aprox. 30 funcionários)
+   => 2 plantas
+   => Endereço de rede 192.168.20.0/16
+
+Equipe 5:
+   Escola de Informática com dois prédios em diferentes endereços de Curitiba/PR (aprox. 150 funcionários)
+   => 2 plantas
+   => Endereço de rede 172.16.0.0/16

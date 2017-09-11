@@ -1,0 +1,43 @@
+perquisar:
+	http_proxy
+	nginx
+	IIS
+	
+testar:
+	apt-cache search apache
+			 libapache2-mod-
+
+	apt-get install apache2
+remover apt-get --purge remove apache2*
+
+	systemctl enable apache2
+	 	  disable
+		  start
+		  stop
+		  reload
+		  status
+
+	/etc/apache2/apache2.conf
+			sites-available
+			sites-enable
+			mods-available
+			mods-enable
+			conf-available
+			conf-enable
+
+	a2enmod ssl //habilitando modulo apache
+		php
+	a2dismod ssl //desabilitando modulo apache
+
+	apache2ctl -M
+	apache2ctl -S
+	a2ensite tamojunto.com
+	a2dissite tamojunto.com
+	
+
+
+
+
+
+
+

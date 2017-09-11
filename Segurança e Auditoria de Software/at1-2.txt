@@ -1,0 +1,15 @@
+Não considerável: 
+	- Derrubar café e escorregar nele;
+	- deixar cair uma casca de banana no chão.
+Relevante: 
+	- Estragar a impressora;
+	- Falta de luz.
+Importante:
+	- Infecção por vírus;
+	- Não deixar a informação atualizada.
+Crítico:
+	- Perda de dorcumentos;
+	- Fazer uma atualização não estável.
+Vital:
+	- um possível ataque hacker;
+	- Incêndio.

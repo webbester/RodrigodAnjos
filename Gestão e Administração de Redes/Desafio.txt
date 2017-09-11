@@ -1,0 +1,4 @@
+portas de serviço - portas 80, 8080, 443
+
+segunda regra
+	@ iptables -A INPUT -d tcp 192.168.100.0/24 --dport 80,8080, 443 -j ACCEPT

@@ -1,0 +1,15 @@
+
+PI - Segurança de Software
+	Segurança e Auditoria de Sistemas
+	Gestão e Adminstração de Redes
+	Fundamentos e Programação de Banco de Dados
+	Engenharia de Software
+
+	Notas
+		AI
+		MB1 = (AV1[0.7] + ED1[0.3])
+		MB2 = (AV2[0.7] + AI[0.3]) * 0.7 + ED2 * 0.3
+		
+		AV = 49%
+		AI = 21%
+		ED = 30%

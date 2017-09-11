@@ -1,0 +1,42 @@
+PESQUISAR, ENTENDER E RESUMIR PARA PPT
+
+(* já feitos)
+ISO*
+ABNT*
+NBR*
+Familia de Normas para SI*
+Vale a pena implantar as normas nas organizações
+Como esta a SI no Brasil
+Carreira no SI
+Certificações
+Fazer Carreira
+
+--
+
+Inserir no ppt
+Segurança em: 
+	dispositivos moveis
+	IoT
+	Operações bancariass e comerciais
+	Redes Sociais
+Diferenciar:
+	Cybersecurity
+	Cyberwar
+	Cyber crime
+	Cyber Spionage
+Senhas seguras
+Criptografia*
+
+referencia: www.cent.br
+	estatistica SI
+	publicações - cartilha
+	palestras
+
+Atividade 30/08
+	Cada equipe seleciona 2 normas para verificar e resumir para nós.
+	Colocar no ppt.
+
+Atividade 06/09
+	Cada equipe seleciona 2 normas para verificar e resumir para nós.
+	Colocar no ppt. (continuação)
+	Norma "Escolhida": ISO / IEC 27002

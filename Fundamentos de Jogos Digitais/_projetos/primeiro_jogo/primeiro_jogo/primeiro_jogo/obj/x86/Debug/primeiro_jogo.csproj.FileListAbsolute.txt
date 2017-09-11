@@ -1,0 +1,17 @@
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\primeiro_jogo.exe
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\primeiro_jogo.pdb
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\Microsoft.Xna.Framework.dll
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\Microsoft.Xna.Framework.Game.dll
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.dll
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.dll
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.dll
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\Microsoft.Xna.Framework.xml
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\Microsoft.Xna.Framework.Game.xml
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.xml
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.xml
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.xml
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\obj\x86\Debug\primeiro_jogo.csprojResolveAssemblyReference.cache
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\obj\x86\Debug\primeiro_jogo.exe
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\obj\x86\Debug\primeiro_jogo.pdb
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\primeiro_jogo\primeiro_jogo\primeiro_jogo\bin\x86\Debug\Content\mario.xnb

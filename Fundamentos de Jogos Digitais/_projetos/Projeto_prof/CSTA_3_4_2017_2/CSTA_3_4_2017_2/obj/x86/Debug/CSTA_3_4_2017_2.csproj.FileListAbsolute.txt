@@ -1,0 +1,36 @@
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\CSTA_3_4_2017_2.exe
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\CSTA_3_4_2017_2.pdb
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.dll
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Game.dll
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.dll
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.dll
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.dll
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.xml
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Game.xml
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.xml
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.xml
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.xml
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\CSTA_3_4_2017_2.csprojResolveAssemblyReference.cache
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\CSTA_3_4_2017_2.exe
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\CSTA_3_4_2017_2.pdb
+c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\mario.xnb
+C:\Users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\megaman.xnb
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\mario.xnb
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\megaman.xnb
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\CSTA_3_4_2017_2.exe
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\CSTA_3_4_2017_2.pdb
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.dll
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Game.dll
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.dll
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.dll
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.dll
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.xml
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Game.xml
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.xml
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.xml
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Microsoft.Xna.Framework.Input.Touch.xml
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\CSTA_3_4_2017_2.csprojResolveAssemblyReference.cache
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\CSTA_3_4_2017_2.exe
+D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\CSTA_3_4_2017_2.pdb

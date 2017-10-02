@@ -1,2 +1,1 @@
 c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2Content\obj\x86\Debug\CSTA_3_4_2017_2Content.contentprojResolveAssemblyReference.cache
-D:\4º Período\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2Content\obj\x86\Debug\CSTA_3_4_2017_2Content.contentprojResolveAssemblyReference.cache

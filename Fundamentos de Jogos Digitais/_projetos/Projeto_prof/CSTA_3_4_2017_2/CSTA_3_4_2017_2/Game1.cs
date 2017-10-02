@@ -20,6 +20,8 @@ namespace CSTA_3_4_2017_2
         SpriteBatch spriteBatch;
         Personagem personagem;
         List<Inimigo> inimigos = new List<Inimigo>();
+        SoundEffect somHit;
+        SoundEffectInstance somHitInstance;
 
         public Game1()
         {
@@ -63,6 +65,9 @@ namespace CSTA_3_4_2017_2
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            somHit = Content.Load<SoundEffect>("somHit");
+            somHitInstance = somHit.CreateInstance();
+
             personagem.LoadContent(this);
 
             for (int i = 0; i < inimigos.Count; i++)
@@ -89,20 +94,35 @@ namespace CSTA_3_4_2017_2
             // Allows the game to exit
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            #region MovimentaPersonagem
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
                 personagem.Mover(Personagem.Direcoes.Cima);
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            else if (Keyboard.GetState().IsKeyDown(Keys.Down))
                 personagem.Mover(Personagem.Direcoes.Baixo);
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            else if (Keyboard.GetState().IsKeyDown(Keys.Right))
                 personagem.Mover(Personagem.Direcoes.Direita);
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            else if (Keyboard.GetState().IsKeyDown(Keys.Left))
                 personagem.Mover(Personagem.Direcoes.Esquerda);
+            else
+                personagem.Parar();
+            #endregion
+
+            #region GanhaPontos
+            for (int i = 0; i < inimigos.Count; i++)
+            {
+                if (personagem.boundingBox.Intersects(inimigos[i].boundingBox))
+                {
+                    inimigos.Remove(inimigos[i]);
+                    personagem.Ganha();
+                    somHit.Play();
+                }
+            }
+            #endregion
 
             personagem.Update(gameTime);
-
             for (int i = 0; i < inimigos.Count; i++)
                 inimigos[i].Update(gameTime);
-
             base.Update(gameTime);
         }
 

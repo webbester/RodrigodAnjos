@@ -22,6 +22,8 @@ namespace CSTA_3_4_2017_2
         Texture2D textura;
         Vector2 posicao;
         Vector2 velocidade;
+        Vector2 tamanho;
+        public Rectangle boundingBox = new Rectangle();
 
         public Inimigo(Game game)
             : base(game)
@@ -50,6 +52,8 @@ namespace CSTA_3_4_2017_2
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             textura = arggame.Content.Load<Texture2D>("mario");
+            tamanho.X = textura.Width;
+            tamanho.Y = textura.Height;
         }
 
         /// <summary>
@@ -58,6 +62,8 @@ namespace CSTA_3_4_2017_2
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
+            boundingBox = new Rectangle((int)posicao.X, (int)posicao.Y, (int)tamanho.X, (int)tamanho.Y);
+
             base.Update(gameTime);
         }
 

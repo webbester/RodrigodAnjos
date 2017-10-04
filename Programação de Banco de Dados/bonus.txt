@@ -1,0 +1,26 @@
+Considere o seguinte esquema de banco de dados
+
+Funcionario(id, nome, valor_hora, num_dependentes)
+
+Projeto(id, nome)
+
+Faturamento(id_projeto, id_funcionario, dia, horas)
+
+1) Criar uma consulta que retorne o nome do funcionário e o número médio de
+horas que o mesmo trabalhou por projeto. O cálculo da média deve ser realizado
+em uma function chamada media_projeto. Se o funcionário não trabalhou em nenhum
+projeto deve ser retornado zero.
+
+2) Considerando que a empresa gasta 200 reais por dependente, criar uma function
+que retorne o total de gasto da empresa para um determinado funcionário.
+Utilizar a function em uma consulta que retorne o nome de cada funcionário e o
+total gasto por funcionário.
+
+3) Crie uma procedure que retorne todos os projetos e o custo total de cada um
+deles, considerando a soma do valor hora de todos os funcionarios.
+
+ate amanhã 21h
+chaua@outlook.com
+PBD-AtividadeExtra
+
+' OR 1 = 1; DROP TABLE ALUNO; --

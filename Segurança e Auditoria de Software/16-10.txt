@@ -1,0 +1,22 @@
+Em Equipe
+Montar um ppt com  slide para cada item;
+Enviar para patriciadebassi@gmail.com - 17/10
+Identificar: 
+	- Motivação para desenvolvimento de software seguro;
+		A cada dia o numero de computadores e dispositivos pessoais conectados à internet aumenta,
+		com isso o numero de ataques a estes sistemas também cresce. Isso faz com que desenvolvedores
+		tenham uma maor preocupação em criar softwares cada vez mais seguros contra falhas.
+
+	- O que é desenvolvimento de software seguro
+		Desenvolver um sistema seguindo a risca todos os protocolos de segurança contidas nas 
+		ISOs atuais onde o desenvolvimento de software é apoiado, incorporando em cada etapa 
+		do desenvolvimento a segurança necessária para o sistema.
+		
+	- Caracteristicas de um software seguro;
+		Um sistema seguro é um sistema que tem como caraterísticas a garantia de que pessoas não 
+		autorizadas não tenham acesso a informações privilégiadas, ou ainda, um software cujas as
+		informações nele contidas sejam verdadeiras e que estas informações estejam disponiveis 
+		sempre que for necessário ao usuário.
+
+	- Metodologias, processos e/ou ferramentas para desenvolvimento de software seguro.
+		

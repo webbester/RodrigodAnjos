@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\mario.xnb</Output>
+      <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\mario.xnb</Output>
       <Time>2015-08-19T21:51:08-03:00</Time>
     </Item>
     <Item>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\megaman.xnb</Output>
-      <Time>2013-11-12T15:54:32-02:00</Time>
+      <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\megaman.xnb</Output>
+      <Time>2013-11-12T14:54:32-02:00</Time>
     </Item>
     <Item>
       <Source>PontosPersonagem.spritefont</Source>
@@ -25,8 +25,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\evand\documents\visual studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\PontosPersonagem.xnb</Output>
-      <Time>2017-08-28T19:41:14.2049419-03:00</Time>
+      <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\PontosPersonagem.xnb</Output>
+      <Time>2017-08-28T19:41:14-03:00</Time>
     </Item>
     <Item>
       <Source>somsteps.wav</Source>
@@ -34,8 +34,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\evand\Documents\Visual Studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\somsteps.xnb</Output>
-      <Time>2013-10-30T08:53:52-02:00</Time>
+      <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\somsteps.xnb</Output>
+      <Time>2013-10-30T07:53:52-02:00</Time>
     </Item>
     <Item>
       <Source>somhit.wav</Source>
@@ -43,8 +43,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\evand\Documents\Visual Studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\somhit.xnb</Output>
-      <Time>2013-10-28T16:12:08-02:00</Time>
+      <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\somhit.xnb</Output>
+      <Time>2013-10-28T15:12:08-02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -53,39 +53,39 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\evand\Documents\Visual Studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\evand\Documents\Visual Studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\evand\Documents\Visual Studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\evand\Documents\Visual Studio 2015\Projects\CSTA_3_4_2017_2\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2Content\</RootDirectory>
+      <LoggerRootDirectory>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\</LoggerRootDirectory>
+      <IntermediateDirectory>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2011-09-01T15:22:30-03:00</Value>
+        <Value>2011-09-01T16:22:30-03:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2011-09-01T15:22:30-03:00</Value>
+        <Value>2011-09-01T16:22:30-03:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2011-09-01T15:22:30-03:00</Value>
+        <Value>2011-09-01T16:22:30-03:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2011-09-01T15:22:30-03:00</Value>
+        <Value>2011-09-01T16:22:30-03:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2011-09-01T15:22:30-03:00</Value>
+        <Value>2011-09-01T16:22:30-03:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2011-09-01T15:22:30-03:00</Value>
+        <Value>2011-09-01T16:22:30-03:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2017-05-18T00:23:49.9039129-03:00</Value>
+        <Value>2017-08-07T19:59:30.9659811-03:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

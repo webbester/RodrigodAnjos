@@ -17,13 +17,16 @@ namespace CSTA_3_4_2017_2
     /// </summary>
     public class Inimigo : Microsoft.Xna.Framework.DrawableGameComponent
     {
+        public enum Direcoes { Baixo, Direita, Esquerda, Cima }
+        public enum Tipos { Mesa, Chave, Fdp }
 
         SpriteBatch spriteBatch;
         Texture2D textura;
-        Vector2 posicao;
+        public Vector2 posicao;
         Vector2 velocidade;
         Vector2 tamanho;
         public Rectangle boundingBox = new Rectangle();
+        public Tipos tipo;
 
         public Inimigo(Game game)
             : base(game)
@@ -31,10 +34,11 @@ namespace CSTA_3_4_2017_2
             posicao = new Vector2(300, 200);
         }
 
-        public Inimigo(Game game, Vector2 argposicao)
+        public Inimigo(Game game, Vector2 argposicao, Tipos argtipo)
             : base(game)
         {
             posicao = argposicao;
+            tipo = argtipo;
         }
 
         /// <summary>
@@ -78,5 +82,16 @@ namespace CSTA_3_4_2017_2
 
             base.Draw(gameTime);
         }
+        public void Mover(Direcoes argdirecao, Vector2 argvelocidade)
+        {
+            switch (argdirecao)
+            {
+                case Direcoes.Cima: posicao.Y -= argvelocidade.Y; break;
+                case Direcoes.Baixo: posicao.Y += argvelocidade.Y; break;
+                case Direcoes.Esquerda: posicao.X -= argvelocidade.X; break;
+                case Direcoes.Direita: posicao.X += argvelocidade.X; break;
+            }
+        }
+
     }
 }

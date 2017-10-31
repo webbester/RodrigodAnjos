@@ -33,7 +33,7 @@ namespace CSTA_3_4_2017_2
             Random r = new Random();
             for (int i = 0; i < 15; i++)
                 inimigos.Add(
-                    new Inimigo(this, new Vector2(r.Next(700), r.Next(400)))
+                    new Inimigo(this, new Vector2(r.Next(700), r.Next(400)), (Inimigo.Tipos)r.Next(3))
                 );
 
         }
@@ -108,19 +108,50 @@ namespace CSTA_3_4_2017_2
                 personagem.Parar();
             #endregion
 
+            #region MudaVelocidade
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+                personagem.setVelocidade(new Vector2(6, 6));
+            else
+                personagem.setVelocidade(new Vector2(3, 3));
+            #endregion
+
+
             #region GanhaPontos
             for (int i = 0; i < inimigos.Count; i++)
             {
                 if (personagem.boundingBox.Intersects(inimigos[i].boundingBox))
                 {
-                    inimigos.Remove(inimigos[i]);
+                    if(inimigos[i].tipo == Inimigo.Tipos.Chave)
+                        inimigos.Remove(inimigos[i]);
+                    else if(inimigos[i].tipo == Inimigo.Tipos.Mesa)
+                        inimigos[i].Mover((Inimigo.Direcoes)personagem.direcao, personagem.velocidade);
                     personagem.Ganha();
                     somHit.Play();
                 }
             }
             #endregion
 
-            personagem.Update(gameTime);
+            for (int i = 0; i < inimigos.Count; i++)
+            {
+                if(inimigos[i].tipo == Inimigo.Tipos.Fdp)
+                {
+                    // Vector2 velPersegue = new Vector2(personagem.velocidade.X + 1, personagem.velocidade.Y + 1);
+                    Vector2 velPersegue = new Vector2(3, 3);
+                    if (inimigos[i].posicao.X - personagem.posicao.X > 0)
+                        inimigos[i].Mover(Inimigo.Direcoes.Esquerda, velPersegue);
+                    else
+                        inimigos[i].Mover(Inimigo.Direcoes.Direita, velPersegue);
+
+                    if (inimigos[i].posicao.Y - personagem.posicao.Y > 0)
+                        inimigos[i].Mover(Inimigo.Direcoes.Cima, velPersegue);
+                    else
+                        inimigos[i].Mover(Inimigo.Direcoes.Baixo, velPersegue);
+                }
+            }
+
+
+
+                personagem.Update(gameTime);
             for (int i = 0; i < inimigos.Count; i++)
                 inimigos[i].Update(gameTime);
             base.Update(gameTime);

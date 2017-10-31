@@ -18,16 +18,16 @@ namespace CSTA_3_4_2017_2
     public class Personagem : Microsoft.Xna.Framework.DrawableGameComponent
     {
 
-        public enum Direcoes { Cima, Baixo, Esquerda, Direita }
-        public enum Estados { Idle, Andando }
+        public enum Direcoes { Baixo, Direita, Esquerda, Cima }
+        public enum Estados { Idle, AndandoBaixo, AndandoDireita, AndandoEsquerda, AndandoCima }
 
         SpriteBatch spriteBatch;
         Texture2D textura;
-        Vector2 posicao;
-        Direcoes direcao = Direcoes.Direita;
-        Vector2 velocidade;
+        public Vector2 posicao;
+        public Direcoes direcao = Direcoes.Direita;
+        public Vector2 velocidade;
         Vector2 frame = new Vector2(0, 0);
-        Vector2 tamanho = new Vector2(35, 35);
+        Vector2 tamanho = new Vector2(66, 79);
         Estados estado = Estados.Idle;
         TimeSpan ultimoUpdate = TimeSpan.Zero;
         public Rectangle boundingBox = new Rectangle();
@@ -40,7 +40,7 @@ namespace CSTA_3_4_2017_2
         public Personagem(Game game)
             : base(game)
         {
-            posicao = new Vector2(300, 200);
+            posicao = new Vector2(370, 400);
         }
 
         public Personagem(Game game, Vector2 argposicao)
@@ -55,7 +55,7 @@ namespace CSTA_3_4_2017_2
         /// </summary>
         public override void Initialize()
         {
-            velocidade = new Vector2(3,1);
+            velocidade = new Vector2(3,3);
 
             base.Initialize();
         }
@@ -63,7 +63,7 @@ namespace CSTA_3_4_2017_2
         public void LoadContent(Game arggame)
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            textura = arggame.Content.Load<Texture2D>("megaman");
+            textura = arggame.Content.Load<Texture2D>("berg3");
             fontePontos = arggame.Content.Load<SpriteFont>("PontosPersonagem");
             somSteps = arggame.Content.Load<SoundEffect>("somSteps");
             somStepsInstance = somSteps.CreateInstance();
@@ -86,22 +86,13 @@ namespace CSTA_3_4_2017_2
                 frame.X++;
                 ultimoUpdate = gameTime.TotalGameTime;
             }
-            if (estado == Estados.Idle)
-            {
-                if (frame.X > 2)
-                    frame.X = 0;
-                frame.Y = 0;
-            }
-            else if (estado == Estados.Andando)
-            {
-                if (frame.X > 9)
-                    frame.X = 0;
-                frame.Y = 1;
-            }
+            if (frame.X > 3)
+                frame.X = 0;
+            frame.Y = (int)estado;
             #endregion
 
             #region SomDePassos
-            if(estado == Estados.Andando)
+            if((int)estado != (int)Estados.Idle)
                 somStepsInstance.Play();
             #endregion
 
@@ -122,7 +113,7 @@ namespace CSTA_3_4_2017_2
                Color.White,
                0f,
                Vector2.Zero,
-               direcao == Direcoes.Direita ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
+               SpriteEffects.None,
                0
             );
             spriteBatch.DrawString(
@@ -140,7 +131,7 @@ namespace CSTA_3_4_2017_2
 
         public void Mover(Direcoes argdirecao)
         {
-            estado = Estados.Andando;
+            estado = (Estados)((int)argdirecao + 1);
             direcao = argdirecao;
             switch(argdirecao)
             {
@@ -162,5 +153,11 @@ namespace CSTA_3_4_2017_2
         {
             pontos++;
         }
+
+        public void setVelocidade(Vector2 argvelocidade)
+        {
+            velocidade = argvelocidade;
+        }
+        
     }
 }

@@ -11,15 +11,6 @@
       <Time>2015-08-19T21:51:08-03:00</Time>
     </Item>
     <Item>
-      <Source>megaman.png</Source>
-      <Name>megaman</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\megaman.xnb</Output>
-      <Time>2013-11-12T14:54:32-02:00</Time>
-    </Item>
-    <Item>
       <Source>PontosPersonagem.spritefont</Source>
       <Name>PontosPersonagem</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -45,6 +36,15 @@
       <Options>None</Options>
       <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\somhit.xnb</Output>
       <Time>2013-10-28T15:12:08-02:00</Time>
+    </Item>
+    <Item>
+      <Source>berg3.png</Source>
+      <Name>berg3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\berg3.xnb</Output>
+      <Time>2017-10-23T21:25:30-02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

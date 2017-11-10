@@ -31,9 +31,17 @@ namespace CSTA_3_4_2017_2
             personagem = new Personagem(this);
 
             Random r = new Random();
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 1; i++)
                 inimigos.Add(
-                    new Inimigo(this, new Vector2(r.Next(700), r.Next(400)), (Inimigo.Tipos)r.Next(3))
+                    //Add randomicamente os 3 tipos de "inimigos"
+                    //new Inimigo(this, new Vector2(r.Next(700), r.Next(400)), (Inimigo.Tipos)r.Next(3))
+                    //Add somente o inimigo escolhido (no caso, fdp)
+                    new Inimigo(this, new Vector2(r.Next(700), r.Next(400)), Inimigo.Tipos.Fdp)
+                );
+
+            for (int i = 0; i < 1; i++)
+                inimigos.Add(
+                    new Inimigo(this, new Vector2(r.Next(700), r.Next(400)), Inimigo.Tipos.Mesa)
                 );
 
         }
@@ -136,7 +144,7 @@ namespace CSTA_3_4_2017_2
                 if(inimigos[i].tipo == Inimigo.Tipos.Fdp)
                 {
                     // Vector2 velPersegue = new Vector2(personagem.velocidade.X + 1, personagem.velocidade.Y + 1);
-                    Vector2 velPersegue = new Vector2(3, 3);
+                    Vector2 velPersegue = new Vector2(2, 2);
                     if (inimigos[i].posicao.X - personagem.posicao.X > 0)
                         inimigos[i].Mover(Inimigo.Direcoes.Esquerda, velPersegue);
                     else

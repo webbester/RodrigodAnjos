@@ -40,3 +40,4 @@ D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_201
 D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\CSTA_3_4_2017_2.exe
 D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\obj\x86\Debug\CSTA_3_4_2017_2.pdb
 D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\berg3.xnb
+D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\mesa.xnb

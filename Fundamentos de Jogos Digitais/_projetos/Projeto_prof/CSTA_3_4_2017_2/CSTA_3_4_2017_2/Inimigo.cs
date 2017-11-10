@@ -55,9 +55,16 @@ namespace CSTA_3_4_2017_2
         public void LoadContent(Game arggame)
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            textura = arggame.Content.Load<Texture2D>("mario");
+            if (tipo == Tipos.Fdp)
+                textura = arggame.Content.Load<Texture2D>("mario");
+            
+
+            if (tipo == Tipos.Mesa)
+                textura = arggame.Content.Load<Texture2D>("mesa");
+           
             tamanho.X = textura.Width;
             tamanho.Y = textura.Height;
+
         }
 
         /// <summary>

@@ -1,0 +1,9 @@
+mount -tcifs //<ip>/comp /mnt
+
+-o username=usuario,workgroup=gestao
+
+smbclient [-L] [-U] [-W] <ip> 
+
+/etc/samba/smb.conf
+	- Global
+	- Share

@@ -3,7 +3,7 @@
 	`Nome` varchar(255) NOT NULL,
 	`Login` varchar(255) NOT NULL,
 	`Senha` varchar(255) NOT NULL,
-	`Ativo` bit NOT NULL,
+	`Ativo` bit NOT NULL DEFAULT 1,
 	PRIMARY KEY (`Id`)
 );
 
@@ -219,17 +219,20 @@ END;//
 
 
 DROP PROCEDURE IF EXISTS VerificaLoginESenha//
-CREATE PROCEDURE VerificaLoginESenha(_login VARCHAR(255), _senha VARCHAR(255))
+CREATE PROCEDURE VerificaLoginESenha(_login VARCHAR(255))
 BEGIN
-  IF ((_login != '') && (_senha != '')) THEN
-    IF(EXISTS(select 1 from usuario where login = _login and senha = _senha)) THEN
-      SELECT 'ok' AS Msg;
-    ELSE
-      SELECT 'Usuario e senha não coincidem' AS Msg;
-    END IF;
-  ELSE
-    SELECT 'Insira um login e senha válidos!' AS Msg;
-  END IF; 
+	SELECT login, senha FROM usuario
+		WHERE login = _login;	
+	
+  -- IF ((_login != '')) THEN
+    -- IF(EXISTS(select 1 from usuario where login = _login) THEN
+      -- SELECT  senha AS Msg;
+    -- ELSE
+      -- SELECT 'Usuario e senha não coincidem' AS Msg;
+    -- END IF;
+  -- ELSE
+    -- SELECT 'Insira um login e senha válidos!' AS Msg;
+  -- END IF;
 END;//
 #call VerificaLoginESenha('samy','asd')
 

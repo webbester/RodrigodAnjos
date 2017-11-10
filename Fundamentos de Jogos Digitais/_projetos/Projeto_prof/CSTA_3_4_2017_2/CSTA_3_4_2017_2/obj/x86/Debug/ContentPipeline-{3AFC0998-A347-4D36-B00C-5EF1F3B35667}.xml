@@ -46,6 +46,15 @@
       <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\berg3.xnb</Output>
       <Time>2017-10-23T21:25:30-02:00</Time>
     </Item>
+    <Item>
+      <Source>mesa.png</Source>
+      <Name>mesa</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\mesa.xnb</Output>
+      <Time>2017-11-06T20:33:56-02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{3AFC0998-A347-4D36-B00C-5EF1F3B35667}</ContentProjectGUID>

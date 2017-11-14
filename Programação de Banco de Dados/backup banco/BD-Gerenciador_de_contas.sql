@@ -152,8 +152,7 @@ DROP PROCEDURE IF EXISTS CriarUsuario//
 CREATE PROCEDURE CriarUsuario(_nome VARCHAR(255), _login VARCHAR(255), _senha VARCHAR(255))
 BEGIN
 	IF ((_nome != '') && (_login != '') && (_senha != '')) THEN
-	
-		IF(EXISTS(select login from usuario where login = _login)) THEN
+    	IF(EXISTS(select * from usuario where login = _login)) THEN
       		SELECT 'Login existente, por favor escolha outro!' AS Msg;
         ELSE	
             INSERT INTO usuario (nome,login,senha,ativo) 
@@ -161,14 +160,10 @@ BEGIN
 						
 			INSERT INTO log (data,operacao_id,tabela,usuario_id) 
 			values (now(),1,'usuario',(SELECT LAST_INSERT_ID()));
-            
-            SELECT 'Cadastro concluído com sucesso!' AS Msg;
-            
          END IF; 
 	ELSE
       	SELECT 'Nome, login e senha devem ser fornecidos para o cadastro!' AS Msg;
-    END IF;
-	
+    END IF; 
 END;//
 
 #Update Usuario
@@ -227,7 +222,7 @@ DROP PROCEDURE IF EXISTS VerificaLoginESenha//
 CREATE PROCEDURE VerificaLoginESenha(_login VARCHAR(255))
 BEGIN
 	SELECT login, senha FROM usuario
-		WHERE login = _login;
+		WHERE login = _login;	
 	
   -- IF ((_login != '')) THEN
     -- IF(EXISTS(select 1 from usuario where login = _login) THEN

@@ -55,6 +55,15 @@
       <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\mesa.xnb</Output>
       <Time>2017-11-06T20:33:56-02:00</Time>
     </Item>
+    <Item>
+      <Source>cenario.png</Source>
+      <Name>cenario</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\TESTE\trunk\Fundamentos de Jogos Digitais\_projetos\Projeto_prof\CSTA_3_4_2017_2\CSTA_3_4_2017_2\bin\x86\Debug\Content\cenario.xnb</Output>
+      <Time>2017-11-20T19:31:50-02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{3AFC0998-A347-4D36-B00C-5EF1F3B35667}</ContentProjectGUID>

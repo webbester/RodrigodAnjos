@@ -139,15 +139,15 @@ insert into tipo_usuario_usuario (Tipo_usuario_id,usuario_id) values (1,1);
 #Alan será Premium
 insert into tipo_usuario_usuario (Tipo_usuario_id,usuario_id) values (3,2);
 
-#Admin será prime
+#Admin será Administrator
 insert into tipo_usuario_usuario (Tipo_usuario_id,usuario_id) values (1,3);
 
 #Joao será Standard
 insert into tipo_usuario_usuario (Tipo_usuario_id,usuario_id) values (4,4);
 
-DELIMITER //
 
-DROP PROCEDURE IF EXISTS CriarUsuario//
+DELIMITER //
+DROP PROCEDURE IF EXISTS CriarUsuario// -- OKAY
 
 CREATE PROCEDURE CriarUsuario(_nome VARCHAR(255), _login VARCHAR(255), _senha VARCHAR(255))
 BEGIN
@@ -158,6 +158,9 @@ BEGIN
         ELSE	
             INSERT INTO usuario (nome,login,senha,ativo) 
             values (_nome,_login,_senha,1);
+			
+			-- incrementado para criar default como standard
+			INSERT INTO tipo_usuario_usuario (Tipo_usuario_id,usuario_id) values (4,SELECT LAST_INSERT_ID()); 
 						
 			INSERT INTO log (data,operacao_id,tabela,usuario_id) 
 			values (now(),1,'usuario',(SELECT LAST_INSERT_ID()));
@@ -173,61 +176,67 @@ END;//
 
 #Update Usuario
 
-DROP PROCEDURE IF EXISTS AtualizarUsuario//
+DROP PROCEDURE IF EXISTS AtualizarUsuario// -- Quem usa esta PROCEDURE, Admin ou user?
 
 CREATE PROCEDURE AtualizarUsuario(IdUsuario int, _nome VARCHAR(255), _senha VARCHAR(255), _ativo bit, IdUsuarioLogado int)
 BEGIN
-IF ((IdUsuario != '') &&(_nome != '') &&(_senha != '') &&(_ativo != '') &&(IdUsuarioLogado != '')) THEN
+	IF ((IdUsuario != '') &&(_nome != '') &&(_senha != '') &&(_ativo != '') &&(IdUsuarioLogado != '')) THEN
 
-IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1)) 
-   OR (IdUsuario = IdUsuarioLogado)) THEN
+		IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1)) 
+		OR (IdUsuario = IdUsuarioLogado)) THEN
 
-update usuario set nome = _nome, senha =_senha, ativo = _ativo where id = IdUsuario;
+			update usuario set nome = _nome, senha =_senha, ativo = _ativo where id = IdUsuario;
 
-INSERT INTO log (data,operacao_id,tabela,usuario_id) 
-values (now(),2,concat('usuarioId:', IdUsuario) ,IdUsuarioLogado);
+			INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+				values (now(),2,concat('usuarioId:', IdUsuario) ,IdUsuarioLogado);
 
-ELSE
-	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
-END IF;
+		ELSE
+			SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+		END IF;
 
-ELSE
-SELECT 'Nome, login e senha devem ser fornecidos para a atualização!' AS Msg;
-END IF; 
+	ELSE
+		SELECT 'Nome, login e senha devem ser fornecidos para a atualização!' AS Msg;
+	END IF; 
 END;//
 
 #Deleta Usuario
 
-
-DROP PROCEDURE IF EXISTS DeletarUsuario//
+DELIMITER //
+DROP PROCEDURE IF EXISTS DeletarUsuario// -- Usado pelo próprio usuário
 
 CREATE PROCEDURE DeletarUsuario(IdUsuario int, IdUsuarioLogado int)
 BEGIN
-IF (IdUsuario != '') THEN
+	IF (IdUsuario != '') THEN
 
-IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1)) 
-   OR (IdUsuario = IdUsuarioLogado)) THEN
+		IF((EXISTS(select 4 or 3 or 2 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1)) 
+		OR (IdUsuario = IdUsuarioLogado)) THEN
 
-delete from usuario where id = IdUsuario;
+			delete from usuario where id = IdUsuario;
 
-INSERT INTO log (data,operacao_id,tabela,usuario_id) 
-values (now(),3,concat('usuarioId:', IdUsuario) ,IdUsuarioLogado);
+			INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+				values (now(),3,concat('usuarioId:', IdUsuario) ,IdUsuarioLogado);
 
-ELSE
-	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
-END IF;
+		ELSE
+			SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+		END IF;
 
-ELSE
-SELECT 'O Id do usuário deve ser fornecido para a exclusão!' AS Msg;
-END IF; 
+	ELSE
+		SELECT 'O Id do usuário deve ser fornecido para a exclusão!' AS Msg;
+	END IF; 
 END;//
 
-
-DROP PROCEDURE IF EXISTS VerificaLoginESenha//
+DELIMITER //
+DROP PROCEDURE IF EXISTS VerificaLoginESenha// -- OKAY
 CREATE PROCEDURE VerificaLoginESenha(_login VARCHAR(255))
 BEGIN
-	SELECT login, senha FROM usuario
+	
+	SELECT login, senha, id, t.Tipo_usuario_id FROM usuario
+		inner join tipo_usuario_usuario t on usuario.id = t.usuario_id
 		WHERE login = _login;
+	
+	-- pega login, senha e ID de retorna de encontrado..
+	-- SELECT login, senha, id FROM usuario
+		-- WHERE login = _login;
 	
   -- IF ((_login != '')) THEN
     -- IF(EXISTS(select 1 from usuario where login = _login) THEN
@@ -242,102 +251,100 @@ END;//
 #call VerificaLoginESenha('samy','asd')
 
 
-DROP PROCEDURE IF EXISTS Criarbanco//
+DROP PROCEDURE IF EXISTS Criarbanco// -- Usado pelo Admin
 
 CREATE PROCEDURE Criarbanco(_nome VARCHAR(255), IdUsuarioLogado int)
 BEGIN
-IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+	IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
 
-IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+		IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
 
-INSERT INTO banco (nome) 
-values (_nome);
+			INSERT INTO banco (nome) values (_nome);
 
-INSERT INTO log (data,operacao_id,tabela,usuario_id) 
-values (now(),1,concat('banco' ,LAST_INSERT_ID()),IdUsuarioLogado);
+			INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+				values (now(),1,concat('banco' ,LAST_INSERT_ID()),IdUsuarioLogado);
 
-ELSE
-	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
-END IF;
+		ELSE
+			SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+		END IF;
 
-ELSE
-SELECT 'Nome e usuario ser fornecidos para o cadastro do banco!' AS Msg;
-END IF; 
+	ELSE
+		SELECT 'Nome e usuario ser fornecidos para o cadastro do banco!' AS Msg;
+	END IF; 
 END;//
 
 #Update banco
 
 
-DROP PROCEDURE IF EXISTS Atualizarbanco//
+DROP PROCEDURE IF EXISTS Atualizarbanco// -- Usado pelo Admin
 
 CREATE PROCEDURE Atualizarbanco(_nome VARCHAR(255), banco_id int, IdUsuarioLogado int)
 BEGIN
-IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
-IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
-update banco set nome = _nome where id = Idbanco;
+	IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+		IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+		update banco set nome = _nome where id = Idbanco;
 
-INSERT INTO log (data,operacao_id,tabela,banco_id) 
-values (now(),2,concat('banco_id:', banco_id),IdUsuarioLogado);
+			INSERT INTO log (data,operacao_id,tabela,banco_id) 
+			values (now(),2,concat('banco_id:', banco_id),IdUsuarioLogado);
 
-ELSE
-	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
-END IF;
+		ELSE
+			SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+		END IF;
 
-ELSE
-SELECT 'O Id do banco e do usuario deve ser fornecido para a atualização!' AS Msg;
-END IF; 
+	ELSE
+		SELECT 'O Id do banco e do usuario deve ser fornecido para a atualização!' AS Msg;
+	END IF; 
 END;//
 
 #Deleta banco
 
 
-DROP PROCEDURE IF EXISTS Deletarbanco//
+DROP PROCEDURE IF EXISTS Deletarbanco// --usado pelo Admin
 
 CREATE PROCEDURE Deletarbanco(Idbanco int, IdUsuarioLogado int)
 BEGIN
-IF ((Idbanco != '') && (IdUsuarioLogado != '')) THEN
-IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
-delete from banco where id = Idbanco;
+	IF ((Idbanco != '') && (IdUsuarioLogado != '')) THEN
+		IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+		delete from banco where id = Idbanco;
 
-INSERT INTO log (data,operacao_id,tabela,banco_id) 
-values (now(),3,concat('Idbanco:', Idbanco),IdUsuarioLogado);
+		INSERT INTO log (data,operacao_id,tabela,banco_id) 
+		values (now(),3,concat('Idbanco:', Idbanco),IdUsuarioLogado);
 
-ELSE
-	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
-END IF;
+		ELSE
+			SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+		END IF;
 
-ELSE
-SELECT 'O Id do banco e do usuario deve ser fornecido para a exclusão!' AS Msg;
-END IF; 
+	ELSE
+		SELECT 'O Id do banco e do usuario deve ser fornecido para a exclusão!' AS Msg;
+	END IF; 
 END;//
 
 
 
-DROP PROCEDURE IF EXISTS Criarforma_pagamento//
+DROP PROCEDURE IF EXISTS Criarforma_pagamento// -- Usado pelo Admin
 
 CREATE PROCEDURE CriarFormaPagamento(_nome VARCHAR(255), IdUsuarioLogado int)
 BEGIN
-IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
-IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
-INSERT INTO forma_pagamento (nome) 
-values (_nome);
+	IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+		IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+			INSERT INTO forma_pagamento (nome) values (_nome);
 
-INSERT INTO log (data,operacao_id,tabela,usuario_id) 
-values (now(),1,concat('forma_pagamento' ,LAST_INSERT_ID()),IdUsuarioLogado);
+			INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+				values (now(),1,concat('forma_pagamento' ,LAST_INSERT_ID()),IdUsuarioLogado);
 
-ELSE
-	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
-END IF;
+		ELSE
+			SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+		END IF;
 
-ELSE
-SELECT 'Nome e usuario ser fornecidos para o cadastro do forma pagamento!' AS Msg;
-END IF; 
+	ELSE
+		SELECT 'Nome e usuario ser fornecidos para o cadastro do forma pagamento!' AS Msg;
+	END IF; 
 END;//
 
 #Update forma_pagamento
 
 
-DROP PROCEDURE IF EXISTS Atualizarforma_pagamento//
+DROP PROCEDURE IF EXISTS Atualizarforma_pagamento// -- Usado pelo Admin
 
 CREATE PROCEDURE AtualizarFormaPagamento(_nome VARCHAR(255), Idforma_pagamento int, IdUsuarioLogado int)
 BEGIN
@@ -360,7 +367,7 @@ END;//
 #Deleta forma_pagamento
 
 
-DROP PROCEDURE IF EXISTS Deletarforma_pagamento//
+DROP PROCEDURE IF EXISTS Deletarforma_pagamento// -- Usado pelo Admin
 
 CREATE PROCEDURE DeletarFormaPagamento(Idforma_pagamento int, IdUsuarioLogado int)
 BEGIN
@@ -383,7 +390,7 @@ END;//
 
 
 
-DROP PROCEDURE IF EXISTS CriarOperacao//
+DROP PROCEDURE IF EXISTS CriarOperacao// -- Usado pelo Admin
 
 CREATE PROCEDURE CriarOperacao(_nome VARCHAR(255), IdUsuarioLogado int)
 BEGIN
@@ -406,8 +413,8 @@ END;//
 
 #Update operacao
 
-
-DROP PROCEDURE IF EXISTS AtualizarOperacao//
+ 
+DROP PROCEDURE IF EXISTS AtualizarOperacao// -- Usado pelo Admin
 
 CREATE PROCEDURE AtualizarOperacao(_nome VARCHAR(255), Idoperacao int, IdUsuarioLogado int)
 BEGIN
@@ -430,7 +437,7 @@ END;//
 #Deleta operacao
 
 
-DROP PROCEDURE IF EXISTS DeletarOperacao//
+DROP PROCEDURE IF EXISTS DeletarOperacao// -- Usado pelo Admin
 
 CREATE PROCEDURE DeletarOperacao(Idoperacao int, IdUsuarioLogado int)
 BEGIN
@@ -453,7 +460,7 @@ END;//
 
 
 
-DROP PROCEDURE IF EXISTS Criartipo_moeda//
+DROP PROCEDURE IF EXISTS Criartipo_moeda// -- Usado pelo Admin
 
 CREATE PROCEDURE CriarTipoMoeda(_nome VARCHAR(255), IdUsuarioLogado int)
 BEGIN
@@ -477,7 +484,7 @@ END;//
 #Update tipo_moeda
 
 
-DROP PROCEDURE IF EXISTS Atualizartipo_moeda//
+DROP PROCEDURE IF EXISTS Atualizartipo_moeda// -- Usado pelo Admin
 
 CREATE PROCEDURE AtualizarTipoMoeda(_nome VARCHAR(255), Idtipo_moeda int, IdUsuarioLogado int)
 BEGIN
@@ -500,7 +507,7 @@ END;//
 #Deleta tipo_moeda
 
 
-DROP PROCEDURE IF EXISTS Deletartipo_moeda//
+DROP PROCEDURE IF EXISTS Deletartipo_moeda// -- Usado pelo Admin
 
 CREATE PROCEDURE DeletarTipoMoeda(Idtipo_moeda int, IdUsuarioLogado int)
 BEGIN
@@ -523,7 +530,7 @@ END;//
 
 
 
-DROP PROCEDURE IF EXISTS CriarTipoTransacao//
+DROP PROCEDURE IF EXISTS CriarTipoTransacao// -- Usado pelo Admin
 
 CREATE PROCEDURE CriarTipoTransacao(_nome VARCHAR(255), IdUsuarioLogado int)
 BEGIN
@@ -547,7 +554,7 @@ END;//
 #Update tipo_transacao
 
 
-DROP PROCEDURE IF EXISTS AtualizarTipoTransacao//
+DROP PROCEDURE IF EXISTS AtualizarTipoTransacao// -- Usado pelo Admin
 
 CREATE PROCEDURE AtualizarTipoTransacao(_nome VARCHAR(255), Idtipo_transacao int, IdUsuarioLogado int)
 BEGIN
@@ -570,7 +577,7 @@ END;//
 #Deleta tipo_transacao
 
 
-DROP PROCEDURE IF EXISTS DeletarTipoTransacao//
+DROP PROCEDURE IF EXISTS DeletarTipoTransacao// -- Usado pelo Admin
 
 CREATE PROCEDURE DeletarTipoTransacao(Idtipo_transacao int, IdUsuarioLogado int)
 BEGIN
@@ -592,48 +599,47 @@ END;//
 
 
 
-DROP PROCEDURE IF EXISTS CriarTipoUsuario//
+DROP PROCEDURE IF EXISTS CriarTipoUsuario// -- Usado pelo Admin
 
 CREATE PROCEDURE CriarTipoUsuario(_nome VARCHAR(255), IdUsuarioLogado int)
 BEGIN
-IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
-IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
-INSERT INTO tipo_usuario (nome) 
-values (_nome);
+	IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+		IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+			INSERT INTO tipo_usuario (nome) values (_nome);
 
-INSERT INTO log (data,operacao_id,tabela,usuario_id) 
-values (now(),1,concat('tipo_usuario' ,LAST_INSERT_ID()),IdUsuarioLogado);
+			INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+			values (now(),1,concat('tipo_usuario' ,LAST_INSERT_ID()),IdUsuarioLogado);
 
-ELSE
-	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
-END IF;
+		ELSE
+			SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+		END IF;
 
-ELSE
-SELECT 'Nome e usuario ser fornecidos para o cadastro do tipo_usuario!' AS Msg;
-END IF; 
+	ELSE
+		SELECT 'Nome e usuario ser fornecidos para o cadastro do tipo_usuario!' AS Msg;
+	END IF; 
 END;//
 
 #Update tipo_usuario
 
 
-DROP PROCEDURE IF EXISTS AtualizarTipoUsuario//
+DROP PROCEDURE IF EXISTS AtualizarTipoUsuario// -- Usado pelo user
 
 CREATE PROCEDURE AtualizarTipoUsuario(_nome VARCHAR(255), Idtipo_usuario int, IdUsuarioLogado int)
 BEGIN
-IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
-IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
-update tipo_usuario set nome = _nome where id = Idtipo_usuario;
+	IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+		IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+		update tipo_usuario set nome = _nome where id = Idtipo_usuario;
 
-INSERT INTO log (data,operacao_id,tabela,tipo_usuario_id) 
-values (now(),2,concat('TipoUsuarioId:', Idtipo_usuario),IdUsuarioLogado);
+		INSERT INTO log (data,operacao_id,tabela,tipo_usuario_id) 
+		values (now(),2,concat('TipoUsuarioId:', Idtipo_usuario),IdUsuarioLogado);
 
-ELSE
-	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
-END IF;
+		ELSE
+			SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+		END IF;
 
-ELSE
-SELECT 'O Id do tipo_usuario e do usuario deve ser fornecido para a atualização!' AS Msg;
-END IF; 
+	ELSE
+		SELECT 'O Id do tipo_usuario e do usuario deve ser fornecido para a atualização!' AS Msg;
+	END IF; 
 END;//
 
 #Deleta tipo_usuario
@@ -643,20 +649,20 @@ DROP PROCEDURE IF EXISTS DeletarTipoUsuario//
 
 CREATE PROCEDURE DeletarTipoUsuario(Idtipo_usuario int, IdUsuarioLogado int)
 BEGIN
-IF ((Idtipo_usuario != '') && (IdUsuarioLogado != '')) THEN
-IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
-delete from tipo_usuario where id = Idtipo_usuario;
+	IF ((Idtipo_usuario != '') && (IdUsuarioLogado != '')) THEN
+		IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+		delete from tipo_usuario where id = Idtipo_usuario;
 
-INSERT INTO log (data,operacao_id,tabela,tipo_usuario_id) 
-values (now(),3,concat('tipo_usuario_id:', tipo_usuario_id),IdUsuarioLogado);
+		INSERT INTO log (data,operacao_id,tabela,tipo_usuario_id) 
+		values (now(),3,concat('tipo_usuario_id:', tipo_usuario_id),IdUsuarioLogado);
 
-ELSE
-	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
-END IF;
+		ELSE
+			SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+		END IF;
 
-ELSE
-SELECT 'O Id do tipo_usuario e do usuario deve ser fornecido para a exclusão!' AS Msg;
-END IF; 
+	ELSE
+		SELECT 'O Id do tipo_usuario e do usuario deve ser fornecido para a exclusão!' AS Msg;
+	END IF; 
 END;//
 
 

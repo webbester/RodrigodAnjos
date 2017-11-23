@@ -27,7 +27,7 @@ namespace CSTA_3_4_2017_2
         public Direcoes direcao = Direcoes.Direita;
         public Vector2 velocidade;
         Vector2 frame = new Vector2(0, 0);
-        Vector2 tamanho = new Vector2(66, 79);
+        public Vector2 tamanho = new Vector2(66, 79);
         Estados estado = Estados.Idle;
         TimeSpan ultimoUpdate = TimeSpan.Zero;
         public Rectangle boundingBox = new Rectangle();
@@ -40,7 +40,7 @@ namespace CSTA_3_4_2017_2
         public Personagem(Game game)
             : base(game)
         {
-            posicao = new Vector2(370, 400);
+            posicao = new Vector2(461, 470);
         }
 
         public Personagem(Game game, Vector2 argposicao)
@@ -151,7 +151,7 @@ namespace CSTA_3_4_2017_2
 
         public void Ganha()
         {
-            pontos++;
+            pontos--;
         }
 
         public void setVelocidade(Vector2 argvelocidade)

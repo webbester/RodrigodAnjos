@@ -23,8 +23,8 @@ namespace CSTA_3_4_2017_2
         SpriteBatch spriteBatch;
         Texture2D textura;
         public Vector2 posicao;
-        Vector2 velocidade;
-        Vector2 tamanho;
+        public Vector2 velocidade;
+        public Vector2 tamanho;
         public Rectangle boundingBox = new Rectangle();
         public Tipos tipo;
 

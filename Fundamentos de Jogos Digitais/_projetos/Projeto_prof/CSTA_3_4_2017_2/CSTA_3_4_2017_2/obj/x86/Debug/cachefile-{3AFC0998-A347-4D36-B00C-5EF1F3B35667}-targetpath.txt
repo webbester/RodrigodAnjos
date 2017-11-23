@@ -4,3 +4,4 @@ Content\somsteps.xnb
 Content\somhit.xnb
 Content\berg3.xnb
 Content\mesa.xnb
+Content\cenario.xnb

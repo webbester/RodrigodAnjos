@@ -22,6 +22,7 @@ namespace CSTA_3_4_2017_2
         List<Inimigo> inimigos = new List<Inimigo>();
         SoundEffect somHit;
         SoundEffectInstance somHitInstance;
+        Texture2D cenario;
 
         public Game1()
         {
@@ -36,12 +37,12 @@ namespace CSTA_3_4_2017_2
                     //Add randomicamente os 3 tipos de "inimigos"
                     //new Inimigo(this, new Vector2(r.Next(700), r.Next(400)), (Inimigo.Tipos)r.Next(3))
                     //Add somente o inimigo escolhido (no caso, fdp)
-                    new Inimigo(this, new Vector2(r.Next(700), r.Next(400)), Inimigo.Tipos.Fdp)
+                    new Inimigo(this, new Vector2(r.Next(692), r.Next(358)), Inimigo.Tipos.Fdp)
                 );
 
             for (int i = 0; i < 1; i++)
                 inimigos.Add(
-                    new Inimigo(this, new Vector2(r.Next(700), r.Next(400)), Inimigo.Tipos.Mesa)
+                    new Inimigo(this, new Vector2(r.Next(692), r.Next(358)), Inimigo.Tipos.Mesa)
                 );
 
         }
@@ -55,6 +56,19 @@ namespace CSTA_3_4_2017_2
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
+            // Altera o vídeo para 800 pixels de largura
+            graphics.PreferredBackBufferWidth = 800;
+            // Altera o vídeo para 600 pixels de altura
+            graphics.PreferredBackBufferHeight = 600;
+            // Desabilita o modo tela cheia
+            graphics.IsFullScreen = false;
+            // Desabilita a visibilidade do mouse dento do jogo
+            IsMouseVisible = false;
+            // Aplica as mudanças
+            graphics.ApplyChanges();
+            // Define o título da janela
+            Window.Title = "Run, Berg! Run!";
 
             personagem.Initialize();
 
@@ -75,6 +89,8 @@ namespace CSTA_3_4_2017_2
 
             somHit = Content.Load<SoundEffect>("somHit");
             somHitInstance = somHit.CreateInstance();
+
+            cenario = Content.Load<Texture2D>(@"cenario");
 
             personagem.LoadContent(this);
 
@@ -144,7 +160,7 @@ namespace CSTA_3_4_2017_2
                 if(inimigos[i].tipo == Inimigo.Tipos.Fdp)
                 {
                     // Vector2 velPersegue = new Vector2(personagem.velocidade.X + 1, personagem.velocidade.Y + 1);
-                    Vector2 velPersegue = new Vector2(2, 2);
+                    Vector2 velPersegue = new Vector2(1, 1);
                     if (inimigos[i].posicao.X - personagem.posicao.X > 0)
                         inimigos[i].Mover(Inimigo.Direcoes.Esquerda, velPersegue);
                     else
@@ -163,6 +179,39 @@ namespace CSTA_3_4_2017_2
             for (int i = 0; i < inimigos.Count; i++)
                 inimigos[i].Update(gameTime);
             base.Update(gameTime);
+
+            #region Colisão personagem
+
+            if(personagem.posicao.X > graphics.PreferredBackBufferWidth - personagem.tamanho.X)
+                personagem.posicao.X -= personagem.velocidade.X;
+            if(personagem.posicao.Y > graphics.PreferredBackBufferHeight - personagem.tamanho.Y)
+                personagem.posicao.Y -= personagem.velocidade.Y;
+            if (personagem.posicao.X < 25)
+                personagem.posicao.X = 25;
+            if (personagem.posicao.Y < 50)
+                personagem.posicao.Y = 50;
+
+            #endregion
+
+            #region Colisão mesa
+
+            for (int i = 0; i < inimigos.Count; i++)
+            {
+                if (inimigos[i].tipo == Inimigo.Tipos.Mesa)
+                {
+                    
+                    if (inimigos[i].posicao.X > graphics.PreferredBackBufferWidth - inimigos[i].tamanho.X)
+                        inimigos[i].posicao.X -= inimigos[i].velocidade.X;
+                    if (inimigos[i].posicao.Y > graphics.PreferredBackBufferHeight - inimigos[i].tamanho.Y)
+                        inimigos[i].posicao.Y -= inimigos[i].velocidade.Y;
+                    if (inimigos[i].posicao.X < 25)
+                        inimigos[i].posicao.X = 25;
+                    if (inimigos[i].posicao.Y < 90)
+                        inimigos[i].posicao.Y = 90;
+                }
+            }
+            #endregion
+
         }
 
         /// <summary>
@@ -171,7 +220,14 @@ namespace CSTA_3_4_2017_2
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
+            // Inicializa o bloco de desenho do objeto do tipo SpriteBatch
+            spriteBatch.Begin();
+            // Desenha o cenario na posição 0, 0 aplicando um filtro onde todas as cores passam
+            spriteBatch.Draw(cenario, new Vector2(0.0f, 0.0f), Color.White);
+            // Finaliza o bloco de desenho do objeto do tipo SpriteBatch    
+            spriteBatch.End();
+            base.Draw(gameTime);
 
             personagem.Draw(gameTime);
 

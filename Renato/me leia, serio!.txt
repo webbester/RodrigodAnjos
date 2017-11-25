@@ -1,9 +1,0 @@
-Coisas a fazer ainda.
-
-#  alterar as sql para procedures. {aguardando fazer a alteração para so funcionar dentro de uma sessao.}
-
-#  Juntar a parte do login com a da transação e fazer funcionar apenas dentro da sessao.
-
-#  Criar triggers para inserir os logs
-
-#  Criar Layout basico.

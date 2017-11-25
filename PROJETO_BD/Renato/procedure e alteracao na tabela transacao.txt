@@ -1,0 +1,65 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Update_Transacao`(Transacao_Id int, Usuario_Id int,Tipo_Transacao_Id_upd int, Banco_Origem_Id_upd int, Banco_Destino_Id_upd int, Forma_Pagamento_Id_upd int,
+ Tipo_Moeda_upd int, Valor_upd decimal(8,2), Data_upd Date, Descricao_upd varchar(255) )
+BEGIN
+UPDATE transacao
+SET Tipo_transacao_id = Tipo_Transacao_Id_upd,
+     Banco_origem_id = Banco_Origem_Id_upd,
+     Banco_destino_id = Banco_Destino_Id_upd,
+     Forma_pagamento_id = Forma_Pagamento_Id_upd,
+     Tipo_moeda_id = Tipo_Moeda_upd,
+     Valor = Valor_upd,
+     Data = Data_upd,
+     Descricao = Descricao_upd
+WHERE
+	id = Transacao_Id AND Usuario_id = Usuario_Id;
+END$$
+DELIMITER ;
+--------------------------------------------------------------------------------
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Delete_Transacao`(id_transacao int, id_usuario int)
+BEGIN
+DELETE FROM transacao
+where id = id_transacao and Usuario_id = id_usuario;
+END$$
+DELIMITER ;
+--------------------------------------------------------------------------
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Insert_Transacao`(Usuario_Id int,Tipo_Transacao_insert int, Banco_Origem_Id_insert int, Banco_Destino_Id_insert int, Forma_Pagamento_Id_insert int,
+ Tipo_Moeda_insert int, Valor_insert decimal(8,2), Data_insert Date, Descricao_insert varchar(255))
+BEGIN
+INSERT INTO transacao(id, Usuario_id, Tipo_transacao_id, Banco_origem_id,Banco_destino_id, Forma_pagamento_id, Tipo_moeda_id, Valor, Data, Descricao) VALUES(null, Usuario_Id, Tipo_Transacao_insert, Banco_Origem_Id_insert, Banco_Destino_Id_insert, Forma_Pagamento_Id_insert, Tipo_Moeda_insert, Valor_insert, Data_insert, Descricao_insert);
+END$$
+DELIMITER ;
+
+--------------------------------------------------------------------------
+
+
+CREATE TABLE `transacao` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Usuario_id` int(11) NOT NULL,
+  `Tipo_transacao_id` int(11) NOT NULL,
+  `Banco_origem_id` int(11) DEFAULT NULL,
+  `Banco_destino_id` int(11) DEFAULT NULL,
+  `Forma_pagamento_id` int(11) NOT NULL,
+  `Tipo_moeda_id` int(11) NOT NULL,
+  `Valor` decimal(8,2) NOT NULL,
+  `Data` date NOT NULL,
+  `Descricao` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `Transacao_fk0` (`Usuario_id`),
+  KEY `Transacao_fk1` (`Tipo_transacao_id`),
+  KEY `Transacao_fk4` (`Forma_pagamento_id`),
+  KEY `Transacao_fk5` (`Tipo_moeda_id`),
+  KEY `Transacao_fk2` (`Banco_origem_id`),
+  KEY `Transacao_fk3` (`Banco_destino_id`),
+  CONSTRAINT `Transacao_fk0` FOREIGN KEY (`Usuario_id`) REFERENCES `usuario` (`Id`),
+  CONSTRAINT `Transacao_fk1` FOREIGN KEY (`Tipo_transacao_id`) REFERENCES `tipo_transacao` (`Id`),
+  CONSTRAINT `Transacao_fk2` FOREIGN KEY (`Banco_origem_id`) REFERENCES `banco` (`Id`),
+  CONSTRAINT `Transacao_fk3` FOREIGN KEY (`Banco_destino_id`) REFERENCES `banco` (`Id`),
+  CONSTRAINT `Transacao_fk4` FOREIGN KEY (`Forma_pagamento_id`) REFERENCES `forma_pagamento` (`Id`),
+  CONSTRAINT `Transacao_fk5` FOREIGN KEY (`Tipo_moeda_id`) REFERENCES `tipo_moeda` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+
+
+

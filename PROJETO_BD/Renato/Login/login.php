@@ -1,16 +1,16 @@
 <?php
 	session_start();
-	session_destroy();
 ?>
 <html>
 	<head>
 		<title> Gerenciador de Contas </title>
+        <link href="../Style.css" type="text/css" rel="stylesheet">
 	</head>
 	<body>
 		<h1 align="center"> Gerenciador de Contas </h1>
-			<table align="center">
+			<table align="center" cellspacing="8" cellpadding="8">
 				<tr><td>
-					<fieldset>
+					<fieldset style="padding: 50px">
 						<form method="post" action="validaLogin.php">
 							<table align="center">
 								<tr><td colspan="2" align=center><font color="blue"><?php if(isset($_GET['Cadastro']) && $_GET['Cadastro'] == 'true')
@@ -18,12 +18,12 @@
 								<tr><td colspan="2" align=center><font color="red"><?php if(isset($_GET['identifier']) && $_GET['identifier'] == 'false')
 																echo 'Usuário e/ou Senha inválidos';?></font></td></tr>
 								<tr>
-									<td>Usuario: </td>
-									<td><input type="text" name="user" required autofocus></td> 
+									<td style="font-size: 24px; font-weight:bold; padding: 5px">Usuario: </td>
+									<td><input  class="input" type="text" name="user" required autofocus></td>
 								</tr>
 								<tr>
-									<td>Senha: </td>
-									<td><input type="password" name="password" required></td>
+									<td style="font-size: 24px; font-weight:bold; padding: 5px">Senha: </td>
+									<td><input class="input" type="password" name="password" required></td>
 								</tr>
 								<tr>
 								</tr>
@@ -37,8 +37,7 @@
 						<form method="post" action="novoCadastro.php">
 							<table align="center">
 								<tr>
-									<td></td>
-									<td align="center"><input type="submit" name="cadastrar" value="Sou Novo na Área"></td>
+									<td style="padding-left: 100px"><input type="submit" name="cadastrar" value="Sou Novo na Área"></td>
 								</tr>
 							</table>
 						</form>

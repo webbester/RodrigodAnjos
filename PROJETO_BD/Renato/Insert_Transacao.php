@@ -1,7 +1,10 @@
 	<?php
-		include 'banco_de_dados.php';
+    session_start();
+    if(!isset($_SESSION['user']))
+        header("location: /Estudo Dirigido Banco de Dados/Login/Login.php");
+    require 'banco_de_dados.php';
 
-		$Nome_Usuario = isset($_POST['Nome_Usuario']) ? $_POST['Nome_Usuario'] : NULL;
+		$Id_Usuario = isset($_SESSION['id_user']) ? $_SESSION['id_user']: NULL;
 		$Tipo_Transacao = isset($_POST['Tipo_Transacao']) ? $_POST['Tipo_Transacao']: NULL;
 		$Banco_Origem = isset($_POST['Banco_Origem']) ? $_POST['Banco_Origem']: NULL;
 		$Banco_Destino = isset($_POST['Banco_Destino']) ? $_POST['Banco_Destino']: NULL;
@@ -20,10 +23,10 @@
 		echo $Valor .'</br>';
 		echo $Data .'</br>';
         echo $Descricao;
-		
+
 		//try {
             $stmt = $conn->prepare("CALL Insert_Transacao(?, ?, ?, ?, ?, ?, ?, ?, ? )");
-            $stmt->bindParam(1, $Nome_Usuario, PDO::PARAM_INT);
+            $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_INT);
             $stmt->bindParam(2, $Tipo_Transacao, PDO::PARAM_INT);
             if ($Banco_Origem == NULL) {
                 $stmt->bindValue(3, NULL,PDO::PARAM_INT);
@@ -46,7 +49,7 @@
             }
             $stmt->execute();
 
-            header("location:Read_Trasancao.php");
+            header("location:Index.php");
         //}catch(PDOException $e){
 		//	echo "Erro ao fazer o insert";
 		//}

@@ -10,7 +10,7 @@ try{
     $stmt->bindParam(2, $id_usuario, PDO::PARAM_STR);
     $stmt->execute();
 
-    header("location:Read_Trasancao.php");
+    header("location:Index.php");
 
 }catch(PDOException $e){
     echo "Erro ao fazer o delete";

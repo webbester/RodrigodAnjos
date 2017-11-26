@@ -1,0 +1,214 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+header{
+    width: 100%;
+    position: absolute;
+    height: 50px;
+    background-color: #3498db;
+}
+body{
+    background-color: white;
+}
+#bemvindo{
+    width: 1280px;
+    height: 50px;
+    left: 50%;
+    position: absolute;
+    transform: translatex(-50%);
+}
+
+h1{
+    position: relative;
+    top: -50px;
+    padding: 20px 0px 0px 0px;
+    width: 300px;
+    text-align: right;
+    font-size: 25px;
+    color: #ecf0f1;
+
+}
+.msg_bemvindo{
+    position: absolute;
+    right: 0;
+}
+h2{
+    width: 300px;
+    padding: 16px 5px 0px 5px;
+    text-align: left;
+    position: relative;
+    top: 0px;
+    font-size: 30px;
+    background-color: #ecf0f1;
+    color: #3498db;
+
+}
+
+#principal{
+    width: 1280px;
+    height: auto;
+    position: absolute;
+    top:50px;
+    left: 50%;
+    transform: translatex(-50%);
+    float: left;
+}
+.menu{
+    width: 230px;
+    height:1000px;
+    position: relative;
+    float: left;
+    left: 0;
+    background-color: #3498db;
+}
+
+.menu  a{
+    background-color: #3498db;
+    color: #ecf0f1;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+
+}
+.menu a:hover{
+    background-color: #ecf0f1;
+    color: #3498db;
+}
+#transacoes{
+    width: 1000px;
+    height: auto;
+    float: left;
+    padding: 10px 20px 10px 30px;
+
+}
+
+#select{
+    -webkit-appearance: none;  /* Remove estilo padrão do Chrome */
+    -moz-appearance: none; /* Remove estilo padrão do FireFox */
+    appearance: none; /* Remove estilo padrão do FireFox*/
+    background: url(http://www.webcis.com.br/images/imagens-noticias/select/ico-seta-appearance.gif) no-repeat #eeeeee;  /* Imagem de fundo (Seta) */
+    background-position: 218px center;  /*Posição da imagem do background*/
+    width: 250px; /* Tamanho do select, maior que o tamanho da div "div-select" */
+    height:30px; /* Altura do select, importante para que tenha a mesma altura em todo os navegadores */
+    border:1px solid #ddd;
+}
+#select_tans{
+    -webkit-appearance: none;  /* Remove estilo padrão do Chrome */
+    -moz-appearance: none; /* Remove estilo padrão do FireFox */
+    appearance: none; /* Remove estilo padrão do FireFox*/
+    background: url(http://www.webcis.com.br/images/imagens-noticias/select/ico-seta-appearance.gif) no-repeat #eeeeee;  /* Imagem de fundo (Seta) */
+    background-position: 503px center;  /*Posição da imagem do background*/
+    width: 535px; /* Tamanho do select, maior que o tamanho da div "div-select" */
+    height:30px; /* Altura do select, importante para que tenha a mesma altura em todo os navegadores */
+    border:1px solid #ddd;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+    width: 250px; /* Tamanho do select, maior que o tamanho da div "div-select" */
+    height:30px; /* Altura do select, importante para que tenha a mesma altura em todo os navegadores */
+    border:1px solid #ddd;
+}
+input[type='date']{
+
+    -moz-appearance:textfield;
+    width: 250px; /* Tamanho do select, maior que o tamanho da div "div-select" */
+    height:30px; /* Altura do select, importante para que tenha a mesma altura em todo os navegadores */
+    border:1px solid #ddd;
+}
+
+.input{
+    -moz-appearance:textfield;
+    width: 250px;
+    height:30px;
+    border:1px solid #ddd;
+}
+
+textarea {
+    resize: none;
+}
+
+fieldset{
+    border-radius: 10px;
+    padding: 20px 10px 10px 10px;
+}
+table{
+    margin-right:auto; margin-left:auto;
+}
+
+input[type="submit"]{
+    padding: 10px 25px 11px !important;
+    font-size: 18px !important;
+    background-color: #3498db;
+    font-weight: bold;
+    text-shadow: 1px 1px #3498db;
+    color: #ecf0f1;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #57D6C7;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+input[type="reset"]{
+    padding: 10px 25px 11px !important;
+    font-size: 18px !important;
+    background-color: #3498db;
+    font-weight: bold;
+    text-shadow: 1px 1px #3498db;
+    color: #ecf0f1;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #57D6C7;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+.Excluir{
+    padding: 10px 25px 11px !important;
+    font-size: 18px !important;
+    background-color: #3498db;
+    font-weight: bold;
+    text-shadow: 1px 1px #3498db;
+    color: #ecf0f1;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #57D6C7;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    text-decoration: none;
+}
+.Voltar{
+    padding: 10px 25px 11px !important;
+    font-size: 18px !important;
+    background-color: #3498db;
+    font-weight: bold;
+    text-shadow: 1px 1px #3498db;
+    color: #ecf0f1;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #57D6C7;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    text-decoration: none;
+}
+
+h3{
+    color: #3498db;
+    font-size: 28px;
+    text-align: center;
+    font-weight: bold;
+}

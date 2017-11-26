@@ -1,8 +1,8 @@
 <?php
 	
 	session_start();
-	
-	include 'bd.php';
+
+	require 'bd.php';
 	
 	#region variaveis do usuario
 		

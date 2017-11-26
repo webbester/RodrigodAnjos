@@ -40,7 +40,7 @@
             <fieldset>
                 <h3>Alterar Transação</h3>
                 <table cellpadding="8" cellspacing="8" align="center">
-                    <form name="Transacao" action="Execute_Update.php" method="post">
+                    <form name="Transacao" action="Execute_Update_Transacao.php" method="post">
                         <input type="hidden" name="id_transacao" value="<?php echo $row['id']?>">
                         <tr><td colspan="5">Tipo de Transação</td></tr>
                         <tr>

@@ -2,7 +2,7 @@
 	
 	session_start();
 	
-	include  '..\banco_de_dados.php';
+	require_once '..\banco_de_dados.php';
 
 	#region ABRE SESSION
 	if(!isset($_SESSION['login'])){

@@ -1,3 +1,0 @@
-
-#  Criar triggers para inserir os logs
-

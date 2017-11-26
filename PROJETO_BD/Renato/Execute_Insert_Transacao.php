@@ -14,17 +14,7 @@
 		$Data = isset($_POST['Data']) ? $_POST['Data']: NULL;
         $Descricao = isset($_POST['Descricao']) ? $_POST['Descricao']: NULL;
 
-		echo $Nome_Usuario .'</br>';
-		echo $Tipo_Transacao .'</br>';
-		echo $Banco_Origem .'</br>';
-		echo $Banco_Destino .'</br>';
-		echo $Forma_Pagamento .'</br>';
-		echo $Moeda .'</br>';
-		echo $Valor .'</br>';
-		echo $Data .'</br>';
-        echo $Descricao;
-
-		//try {
+		try {
             $stmt = $conn->prepare("CALL Insert_Transacao(?, ?, ?, ?, ?, ?, ?, ?, ? )");
             $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_INT);
             $stmt->bindParam(2, $Tipo_Transacao, PDO::PARAM_INT);
@@ -50,7 +40,7 @@
             $stmt->execute();
 
             header("location:Index.php");
-        //}catch(PDOException $e){
-		//	echo "Erro ao fazer o insert";
-		//}
+        }catch(PDOException $e){
+			echo "Erro ao fazer o insert";
+		}
 	?>

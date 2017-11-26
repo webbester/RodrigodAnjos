@@ -31,7 +31,7 @@
  <fieldset>
      <h3>Nova Transação</h3>
 <table cellpadding="8" cellspacing="8" align="center">
-    <form name="Transacao" action="Insert_Transacao.php" method="post">
+    <form name="Transacao" action="Execute_Insert_Transacao.php" method="post">
         <tr><td colspan="5">Tipo de Transação</td></tr>
         <tr>
             <td colspan="4">

@@ -1,4 +1,4 @@
-TABELAS------------------------------------------------------------------
+﻿TABELAS------------------------------------------------------------------
 
 CREATE TABLE `transacao` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
@@ -717,3 +717,32 @@ BEGIN
   -- END IF;
 END$$
 DELIMITER ;
+
+TRIGGERS----------------------------------------------------------------------------------------------------------------------------
+
+Delimiter $$
+create trigger Delete_Transacao
+AFTER DELETE on transacao
+FOR EACH ROW
+BEGIN
+	INSERT INTO LOG VALUES(null, OLD.Usuario_Id, now(), 3, 'Transacao');
+END$$
+Delimiter ;
+
+Delimiter $$
+create trigger Insert_Transacao
+AFTER INSERT on transacao
+FOR EACH ROW
+BEGIN
+	INSERT INTO LOG VALUES(null, NEW.Usuario_Id, now(), 1, 'Transacao');
+END$$
+Delimiter ;
+
+Delimiter $$
+create trigger Update_Transacao
+AFTER UPDATE on transacao
+FOR EACH ROW
+BEGIN
+	INSERT INTO LOG VALUES(null, NEW.Usuario_Id, now(), 2, 'Transacao');
+END$$
+Delimiter ;

@@ -28,7 +28,7 @@
 		exit;
 	} else {
 		header('location:validaCadastro.php');
-		// header('location:validaCadastro.php?Cadastro=true');
+		 //header('location:validaCadastro.php?Cadastro=true');
 		exit;
 	}
 ?>

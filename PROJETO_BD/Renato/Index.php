@@ -147,7 +147,7 @@
                         <tr>
                             <td>
                                 <input type="submit" value="Editar">
-                                <a class="Excluir" href="Execute_Delete.php?id_transacao=<?php echo "{$row['id']}"?>&usr_id=<?php echo $_SESSION['id_user'] ?>"">Excluir</a>
+                                <a class="Excluir" href="Execute_Delete_Transacao.php?id_transacao=<?php echo "{$row['id']}"?>&usr_id=<?php echo $_SESSION['id_user'] ?>"">Excluir</a>
                             </td>
                         </tr>
 

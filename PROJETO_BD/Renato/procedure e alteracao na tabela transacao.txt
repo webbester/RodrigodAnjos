@@ -4,6 +4,7 @@ CREATE TABLE `transacao` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Usuario_id` int(11) NOT NULL,
   `Tipo_transacao_id` int(11) NOT NULL,
+  `Categoria`VRACHAR(50) NOT NULL,
   `Banco_origem_id` int(11) DEFAULT NULL,
   `Banco_destino_id` int(11) DEFAULT NULL,
   `Forma_pagamento_id` int(11) NOT NULL,

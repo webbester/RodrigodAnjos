@@ -1,8 +1,8 @@
 <?php
 	
 	session_start();
-
-	require 'bd.php';
+	
+	include 'bd.php';
 	
 	#region variaveis do usuario
 		
@@ -38,7 +38,7 @@
 		$stmt->execute();
 		
 		$result=$stmt->fetch();
-		print_r ($result[0])."<br>";
+		//print_r ($result[0])."<br>";
 		
 		if($result[0] == "Login existente, por favor escolha outro!"){
 			header("location:novoCadastro.php?login=ja-existe");

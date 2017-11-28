@@ -1,0 +1,192 @@
+CREATE TABLE `categoria` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `transacao` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Usuario_id` int(11) NOT NULL,
+  `Tipo_transacao_id` int(11) NOT NULL,
+  `Banco_origem_id` int(11) DEFAULT NULL,
+  `Banco_destino_id` int(11) DEFAULT NULL,
+  `Forma_pagamento_id` int(11) NOT NULL,
+  `Tipo_moeda_id` int(11) NOT NULL,
+  `Valor` decimal(8,2) NOT NULL,
+  `Data` date NOT NULL,
+  `Descricao` varchar(255) DEFAULT NULL,
+  `Categoria_id` int(11) NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `Transacao_fk0` (`Usuario_id`),
+  KEY `Transacao_fk1` (`Tipo_transacao_id`),
+  KEY `Transacao_fk4` (`Forma_pagamento_id`),
+  KEY `Transacao_fk5` (`Tipo_moeda_id`),
+  KEY `Transacao_fk2` (`Banco_origem_id`),
+  KEY `Transacao_fk3` (`Banco_destino_id`),
+  KEY `Transacao_fk6` (`Categoria_id`),
+  CONSTRAINT `Transacao_fk0` FOREIGN KEY (`Usuario_id`) REFERENCES `usuario` (`Id`),
+  CONSTRAINT `Transacao_fk1` FOREIGN KEY (`Tipo_transacao_id`) REFERENCES `tipo_transacao` (`Id`),
+  CONSTRAINT `Transacao_fk2` FOREIGN KEY (`Banco_origem_id`) REFERENCES `banco` (`Id`),
+  CONSTRAINT `Transacao_fk3` FOREIGN KEY (`Banco_destino_id`) REFERENCES `banco` (`Id`),
+  CONSTRAINT `Transacao_fk4` FOREIGN KEY (`Forma_pagamento_id`) REFERENCES `forma_pagamento` (`Id`),
+  CONSTRAINT `Transacao_fk5` FOREIGN KEY (`Tipo_moeda_id`) REFERENCES `tipo_moeda` (`Id`),
+  CONSTRAINT `Transacao_fk6` FOREIGN KEY (`Categoria_id`) REFERENCES `Categoria` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+INSERT INTO `estudo_dirigido_bd`.`categoria`
+(`Id`,
+`Nome`)
+VALUES
+(null,
+'Estudo');
+
+INSERT INTO `estudo_dirigido_bd`.`transacao`
+(`Id`,
+`Usuario_id`,
+`Tipo_transacao_id`,
+`Banco_origem_id`,
+`Banco_destino_id`,
+`Forma_pagamento_id`,
+`Tipo_moeda_id`,
+`Valor`,
+`Data`,
+`Descricao`,
+`Categoria_id`)
+VALUES
+(null,
+5,
+1,
+1,
+1,
+1,
+1,
+1234,
+'2017-11-10',
+'oi',
+1);
+
+
+
+
+------------------------------------------------------------------------------------------
+
+DELIMITER $$
+CREATE PROCEDURE Listar_Todas_Transacao(ID_Usuario int)
+BEGIN
+Select 
+       transacao.id,
+       transacao.Usuario_id,
+	   usuario.nome as nome_usuario,
+       
+       transacao.Tipo_transacao_id,       
+       tipo_transacao.nome as nome_tipo_transacao,
+       
+       transacao.Banco_origem_id,
+       a.nome as nome_banco_origem,
+       
+       transacao.Banco_destino_id,
+       b.nome as nome_banco_destino,
+       
+       transacao.Forma_pagamento_id,
+       forma_pagamento.nome as nome_forma_pagamento,
+       
+       transacao.Tipo_moeda_id,
+       tipo_moeda.nome as nome_tipo_moeda,
+       
+       transacao.Categoria_id,
+       categoria.nome as Nome_Categoria,
+       
+       transacao.Valor,
+       transacao.Data,
+       transacao.descricao
+       from transacao 
+       JOIN usuario on transacao.usuario_id = usuario.id
+       JOIN tipo_transacao on transacao.tipo_transacao_id = tipo_transacao.id
+       LEFT JOIN banco a on a.id = banco_origem_id
+       LEFT JOIN banco b on b.id = banco_destino_id
+       JOIN forma_pagamento on forma_pagamento.id = forma_pagamento_id
+       JOIN tipo_moeda on tipo_moeda.id = transacao.Tipo_moeda_id
+       JOIN categoria on categoria.Id = transacao.Categoria_id
+       where transacao.Usuario_id = ID_Usuario
+       order by transacao.id DESC;
+END$$
+DELIMITER ;
+
+drop procedure ReturnAll_Categoria
+DELIMITER $$
+CREATE PROCEDURE ReturnAll_Categoria(id_categoria int)
+BEGIN
+	SELECT * FROM categoria where id not in(select id from categoria where id = id_categoria);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Insert_Transacao`(Usuario_Id int,Tipo_Transacao_insert int, Banco_Origem_Id_insert int, Banco_Destino_Id_insert int, Forma_Pagamento_Id_insert int,
+ Tipo_Moeda_insert int, Valor_insert decimal(8,2), Data_insert Date, Descricao_insert varchar(255), Categoria_id_Insert int)
+BEGIN
+INSERT INTO transacao(id, Usuario_id, Tipo_transacao_id, Banco_origem_id,Banco_destino_id, Forma_pagamento_id, Tipo_moeda_id, Valor, Data, Descricao, Categoria_id) VALUES(null, Usuario_Id, Tipo_Transacao_insert, Banco_Origem_Id_insert, Banco_Destino_Id_insert, Forma_Pagamento_Id_insert, Tipo_Moeda_insert, Valor_insert, Data_insert, Descricao_insert, Categoria_id_Insert);
+END$$
+DELIMITER ;
+
+drop procedure ReturnOneTransacao
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnOneTransacao`(id_transacao int)
+BEGIN
+Select 
+       transacao.id,
+       transacao.Usuario_id,
+	   usuario.nome as nome_usuario,
+       
+       transacao.Tipo_transacao_id,       
+       tipo_transacao.nome as nome_tipo_transacao,
+       
+       transacao.Banco_origem_id,
+       a.nome as nome_banco_origem,
+       
+       transacao.Banco_destino_id,
+       b.nome as nome_banco_destino,
+       
+       transacao.Forma_pagamento_id,
+       forma_pagamento.nome as nome_forma_pagamento,
+       
+       transacao.Tipo_moeda_id,
+       tipo_moeda.nome as nome_tipo_moeda,
+       
+        transacao.Categoria_id,
+       categoria.nome as Nome_Categoria,
+       
+       transacao.Valor,
+       transacao.Data,
+       transacao.descricao
+       from transacao 
+       JOIN usuario on transacao.usuario_id = usuario.id
+       JOIN tipo_transacao on transacao.tipo_transacao_id = tipo_transacao.id
+       LEFT JOIN banco a on a.id = banco_origem_id
+       LEFT JOIN banco b on b.id = banco_destino_id
+       JOIN forma_pagamento on forma_pagamento.id = forma_pagamento_id
+       JOIN tipo_moeda on tipo_moeda.id = transacao.Tipo_moeda_id
+       JOIN categoria on categoria.Id = transacao.Categoria_id
+       where transacao.id = id_transacao;
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Update_Transacao`(Transacao_Id int, Usuario_Id int,Tipo_Transacao_Id_upd int, Banco_Origem_Id_upd int, Banco_Destino_Id_upd int, Forma_Pagamento_Id_upd int,
+ Tipo_Moeda_upd int, Valor_upd decimal(8,2), Data_upd Date, Descricao_upd varchar(255), Categoria_id_upd int )
+BEGIN
+UPDATE transacao
+SET Tipo_transacao_id = Tipo_Transacao_Id_upd,
+     Banco_origem_id = Banco_Origem_Id_upd,
+     Banco_destino_id = Banco_Destino_Id_upd,
+     Forma_pagamento_id = Forma_Pagamento_Id_upd,
+     Tipo_moeda_id = Tipo_Moeda_upd,
+     Valor = Valor_upd,
+     Data = Data_upd,
+     Descricao = Descricao_upd,
+     Categoria_id = Categoria_id_upd
+WHERE
+	id = Transacao_Id AND Usuario_id = Usuario_Id;
+END$$
+DELIMITER ;

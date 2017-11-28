@@ -1,0 +1,902 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Atualizarbanco`(_nome VARCHAR(255), banco_id int, IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+update banco set Nome = _nome where Id = banco_id;
+
+INSERT INTO log (data,operacao_id,tabela,Usuario_id) 
+values (now(),2,concat('Usuario_id:', Usuario_id),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do banco e do usuario deve ser fornecido para a atualização!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AtualizarFormaPagamento`(_nome VARCHAR(255), Idforma_pagamento int, IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+update forma_pagamento set nome = _nome where id = Idforma_pagamento;
+
+INSERT INTO log (data,operacao_id,tabela,Usuario_id) 
+values (now(),2,concat('Usuario_id:', Usuario_id),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do banco e do usuario deve ser fornecido para a atualização!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AtualizarOperacao`(_nome VARCHAR(255), Idoperacao int, IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+update operacao set nome = _nome where id = Idoperacao;
+
+INSERT INTO log (data,operacao_id,tabela,Usuario_id) 
+values (now(),2,concat('Usuario_id:', Usuario_id),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do banco e do usuario deve ser fornecido para a atualização!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AtualizarTipoMoeda`(_nome VARCHAR(255), Idtipo_moeda int, IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+update tipo_moeda set nome = _nome where id = Idtipo_moeda;
+
+INSERT INTO log (data,operacao_id,tabela,Usuario_id) 
+values (now(),2,concat('Usuario_id:', Usuario_id),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do banco e do usuario deve ser fornecido para a atualização!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AtualizarTipoTransacao`(_nome VARCHAR(255), Idtipo_transacao int, IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+update tipo_transacao set nome = _nome where id = Idtipo_transacao;
+
+INSERT INTO log (data,operacao_id,tabela,Usuario_id) 
+values (now(),2,concat('Usuario_id:', Usuario_id),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do tipo_transacao e do usuario deve ser fornecido para a atualização!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AtualizarTipoUsuario`(_nome VARCHAR(255), Idtipo_usuario int, IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+update tipo_usuario set nome = _nome where id = Idtipo_usuario;
+
+INSERT INTO log (data,operacao_id,tabela,tipo_usuario_id) 
+values (now(),2,concat('TipoUsuarioId:', Idtipo_usuario),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do tipo_usuario e do usuario deve ser fornecido para a atualização!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AtualizarUsuario`(IdUsuario int, _nome VARCHAR(255), _senha VARCHAR(255), _ativo bit, IdUsuarioLogado int)
+BEGIN
+IF ((IdUsuario != '') &&(_nome != '') &&(_senha != '') &&(_ativo != '') &&(IdUsuarioLogado != '')) THEN
+
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1)) 
+   OR (IdUsuario = IdUsuarioLogado)) THEN
+
+update usuario set nome = _nome, senha =_senha, ativo = _ativo where id = IdUsuario;
+
+INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+values (now(),2,concat('usuarioId:', IdUsuario) ,IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'Nome, login e senha devem ser fornecidos para a atualização!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Criarbanco`(_nome VARCHAR(255), IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+
+INSERT INTO banco (nome) 
+values (_nome);
+
+INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+values (now(),1,concat('banco' ,LAST_INSERT_ID()),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'Nome e usuario ser fornecidos para o cadastro do banco!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CriarFormaPagamento`(_nome VARCHAR(255), IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+INSERT INTO forma_pagamento (nome) 
+values (_nome);
+
+INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+values (now(),1,concat('forma_pagamento' ,LAST_INSERT_ID()),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'Nome e usuario ser fornecidos para o cadastro do forma pagamento!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CriarOperacao`(_nome VARCHAR(255), IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+INSERT INTO operacao (nome) 
+values (_nome);
+
+INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+values (now(),1,concat('operacao' ,LAST_INSERT_ID()),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'Nome e usuario ser fornecidos para o cadastro do forma pagamento!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CriarTipoMoeda`(_nome VARCHAR(255), IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+INSERT INTO tipo_moeda (nome) 
+values (_nome);
+
+INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+values (now(),1,concat('tipo_moeda' ,LAST_INSERT_ID()),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'Nome e usuario ser fornecidos para o cadastro do tipo_moeda!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CriarTipoTransacao`(_nome VARCHAR(255), IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+INSERT INTO tipo_transacao (nome) 
+values (_nome);
+
+INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+values (now(),1,concat('tipo_transacao' ,LAST_INSERT_ID()),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'Nome e usuario ser fornecidos para o cadastro do tipo_transacao!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CriarTipoUsuario`(_nome VARCHAR(255), IdUsuarioLogado int)
+BEGIN
+IF ((_nome != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+INSERT INTO tipo_usuario (nome) 
+values (_nome);
+
+INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+values (now(),1,concat('tipo_usuario' ,LAST_INSERT_ID()),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'Nome e usuario ser fornecidos para o cadastro do tipo_usuario!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CriarTransacao`(_usuario_id Int, _tipo_transacao_id int, _banco_origem_id int, _banco_destino_id int, _forma_pagamento_id int, _tipo_moeda int, _valor DECIMAL(8,2), IdUsuarioLogado int)
+BEGIN
+#verificar se todos os parametros foram passados
+IF ((_usuario_id != '') && (_tipo_transacao_id != '') && (_banco_origem_id != '') && (_banco_destino_id != '') && (_forma_pagamento_id != '') && (_tipo_moeda != '') && (_valor != '') && (IdUsuarioLogado != '')) THEN
+	#verificar se o usuario que quer adicionar é o mesmo que está "logado"
+	IF(IdUsuarioLogado = _usuario_id) THEN
+		#Pegar o tipo do usuario, importando apenas o mais "forte"
+		SELECT  @TipoUsuario :=  Tipo_usuario_id FROM tipo_usuario_usuario where Usuario_id = _usuario_id order by tipo_usuario_id limit 1;
+		
+		#Pegar a quantidade de transaçõs nos ultimos 30 dias
+		SELECT @QuantidadeTransacoesNoUltimoMes := COUNT(*) FROM transacao where transacao.Usuario_id = _usuario_id AND transacao.Data >= NOW() - INTERVAL 30 DAY;
+		
+		#se for admin pode tudo, se for Prime até 10 transações, se for Premium até 6 transações e se for Standard até 3 transações
+		IF ((@TipoUsuario = 1) || 
+			(@TipoUsuario = 2 && @QuantidadeTransacoesNoUltimoMes < 10) || 
+			(@TipoUsuario = 3 && @QuantidadeTransacoesNoUltimoMes < 6) || 
+			(@TipoUsuario = 4 && @QuantidadeTransacoesNoUltimoMes < 3))THEN
+			INSERT INTO Transacao (Usuario_id,Tipo_transacao_id,Banco_origem_id,Banco_destino_id,Forma_pagamento_id,Tipo_moeda,Valor,Data) 
+			values (_usuario_id,_tipo_transacao_id,_banco_origem_id,_banco_destino_id,_forma_pagamento_id,_tipo_moeda,_valor,(NOW()));
+
+			INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+			values (now(),1,concat('Transacao - ID:' ,LAST_INSERT_ID()),IdUsuarioLogado);
+		ELSE
+			SELECT 'Você não pode mais realizar transações, mude de plano para continuar usando normalmente' AS Msg;
+		END IF;
+
+	ELSE
+		SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+	END IF;
+ELSE
+SELECT 'Todos os campos devem ser fornecidos para o cadastro!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CriarUsuario`(_nome VARCHAR(255), _login VARCHAR(255), _senha VARCHAR(255))
+BEGIN
+	IF ((_nome != '') && (_login != '') && (_senha != '')) THEN
+	
+		IF(EXISTS(select login from usuario where login = _login)) THEN
+      		SELECT 'Login existente, por favor escolha outro!' AS Msg;
+        ELSE	
+            INSERT INTO usuario (nome,login,senha,ativo) 
+            values (_nome,_login,_senha,1);
+						
+			INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+			values (now(),1,'usuario',(SELECT LAST_INSERT_ID()));
+            
+            SELECT 'Cadastro concluído com sucesso!' AS Msg;
+            
+         END IF; 
+	ELSE
+      	SELECT 'Nome, login e senha devem ser fornecidos para o cadastro!' AS Msg;
+    END IF;
+	
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Deletarbanco`(Idbanco int, IdUsuarioLogado int)
+BEGIN
+IF ((Idbanco != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+delete from banco where id = Idbanco;
+
+INSERT INTO log (data,operacao_id,tabela,Usuario_id) 
+values (now(),2,concat('Usuario_id:', Usuario_id),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do banco e do usuario deve ser fornecido para a exclusão!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletarFormaPagamento`(Idforma_pagamento int, IdUsuarioLogado int)
+BEGIN
+IF ((Idforma_pagamento != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+delete from forma_pagamento where id = Idforma_pagamento;
+
+INSERT INTO log (data,operacao_id,tabela,Usuario_id) 
+values (now(),2,concat('Usuario_id:', Usuario_id),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do forma pagamento e do usuario deve ser fornecido para a exclusão!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletarOperacao`(Idoperacao int, IdUsuarioLogado int)
+BEGIN
+IF ((Idoperacao != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+delete from operacao where id = Idoperacao;
+
+INSERT INTO log (data,operacao_id,tabela,Usuario_id) 
+values (now(),2,concat('Usuario_id:', Usuario_id),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do forma pagamento e do usuario deve ser fornecido para a exclusão!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletarTipoMoeda`(Idtipo_moeda int, IdUsuarioLogado int)
+BEGIN
+IF ((Idtipo_moeda != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+delete from tipo_moeda where id = Idtipo_moeda;
+
+INSERT INTO log (data,operacao_id,tabela,Usuario_id) 
+values (now(),2,concat('Usuario_id:', Usuario_id),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do tipo_moeda e do usuario deve ser fornecido para a exclusão!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletarTipoTransacao`(Idtipo_transacao int, IdUsuarioLogado int)
+BEGIN
+IF ((Idtipo_transacao != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+delete from tipo_transacao where id = Idtipo_transacao;
+
+INSERT INTO log (data,operacao_id,tabela,Usuario_id) 
+values (now(),2,concat('Usuario_id:', Usuario_id),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do tipo_transacao e do usuario deve ser fornecido para a exclusão!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletarTipoUsuario`(Idtipo_usuario int, IdUsuarioLogado int)
+BEGIN
+IF ((Idtipo_usuario != '') && (IdUsuarioLogado != '')) THEN
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1))) THEN
+delete from tipo_usuario where id = Idtipo_usuario;
+
+INSERT INTO log (data,operacao_id,tabela,tipo_usuario_id) 
+values (now(),3,concat('tipo_usuario_id:', tipo_usuario_id),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do tipo_usuario e do usuario deve ser fornecido para a exclusão!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletarTransacao`(IdTransacao int, IdUsuarioLogado int)
+BEGIN
+IF (IdTransacao != '' && IdUsuarioLogado != '') THEN
+IF(EXISTS(select 1 from Transacao where Usuario_id = IdUsuarioLogado AND id = IdTransacao)) THEN
+	#passo 1: deletar a transação
+	delete from Transacao where id = IdTransacao;
+
+	#passo2: Gerar log	
+	INSERT INTO log (data,operacao_id,tabela,Transacao_id) 
+	values (now(),3,concat('Transacao_id:', IdTransacao),IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id da transação e o Id do usuário deve ser fornecido para a exclusão!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeletarUsuario`(IdUsuario int, IdUsuarioLogado int)
+BEGIN
+IF (IdUsuario != '') THEN
+
+IF((EXISTS(select 1 from tipo_usuario_usuario where Usuario_id = IdUsuarioLogado AND tipo_usuario_id = 1)) 
+   OR (IdUsuario = IdUsuarioLogado)) THEN
+
+delete from usuario where id = IdUsuario;
+
+INSERT INTO log (data,operacao_id,tabela,usuario_id) 
+values (now(),3,concat('usuarioId:', IdUsuario) ,IdUsuarioLogado);
+
+ELSE
+	SELECT 'Usuário não tem permissão para realizar a opereção' AS Msg;
+END IF;
+
+ELSE
+SELECT 'O Id do usuário deve ser fornecido para a exclusão!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Delete_Transacao`(id_transacao int, id_usuario int)
+BEGIN
+DELETE FROM transacao
+where id = id_transacao and Usuario_id = id_usuario;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Listar_Todas_Transacao`(ID_Usuario int)
+BEGIN
+Select 
+       transacao.id,
+       transacao.Usuario_id,
+	   usuario.nome as nome_usuario,
+       
+       transacao.Tipo_transacao_id,       
+       tipo_transacao.nome as nome_tipo_transacao,
+       
+       transacao.Banco_origem_id,
+       a.nome as nome_banco_origem,
+       
+       transacao.Banco_destino_id,
+       b.nome as nome_banco_destino,
+       
+       transacao.Forma_pagamento_id,
+       forma_pagamento.nome as nome_forma_pagamento,
+       
+       transacao.Tipo_moeda_id,
+       tipo_moeda.nome as nome_tipo_moeda,
+       
+       transacao.Categoria_id,
+       categoria.nome as Nome_Categoria,
+       
+       transacao.Valor,
+       transacao.Data,
+       transacao.descricao
+       from transacao 
+       JOIN usuario on transacao.usuario_id = usuario.id
+       JOIN tipo_transacao on transacao.tipo_transacao_id = tipo_transacao.id
+       LEFT JOIN banco a on a.id = banco_origem_id
+       LEFT JOIN banco b on b.id = banco_destino_id
+       JOIN forma_pagamento on forma_pagamento.id = forma_pagamento_id
+       JOIN tipo_moeda on tipo_moeda.id = transacao.Tipo_moeda_id
+       JOIN categoria on categoria.Id = transacao.Categoria_id
+       where transacao.Usuario_id = ID_Usuario
+       order by transacao.id DESC;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Insert_Transacao`(Usuario_Id int,Tipo_Transacao_insert int, Banco_Origem_Id_insert int, Banco_Destino_Id_insert int, Forma_Pagamento_Id_insert int,
+ Tipo_Moeda_insert int, Valor_insert decimal(8,2), Data_insert Date, Descricao_insert varchar(255), Categoria_id_Insert int)
+BEGIN
+INSERT INTO transacao(id, Usuario_id, Tipo_transacao_id, Banco_origem_id,Banco_destino_id, Forma_pagamento_id, Tipo_moeda_id, Valor, Data, Descricao, Categoria_id) VALUES(null, Usuario_Id, Tipo_Transacao_insert, Banco_Origem_Id_insert, Banco_Destino_Id_insert, Forma_Pagamento_Id_insert, Tipo_Moeda_insert, Valor_insert, Data_insert, Descricao_insert, Categoria_id_Insert);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Retorna_ID_User`(user varchar(255))
+BEGIN
+select id 
+from usuario
+where Login = user;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Retorna_User`(user varchar(255), password varchar(255), out id_user int)
+BEGIN
+select id 
+into id_user 
+from usuario
+where Login = user and senha = password;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAll_Banco`()
+BEGIN
+	SELECT * FROM banco;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAll_Categoria`(id_categoria int)
+BEGIN
+	SELECT * FROM categoria where id not in(select id from categoria where id = id_categoria);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAll_Forma_Pagamento`()
+BEGIN
+	SELECT * FROM forma_pagamento;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAll_Operacao`()
+BEGIN
+	SELECT * FROM operacao;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAll_Tipo_Moeda`()
+BEGIN
+	SELECT * FROM tipo_moeda;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAll_Tipo_Transacao`()
+BEGIN
+	SELECT * FROM tipo_transacao;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAll_Tipo_Usuario`()
+BEGIN
+	SELECT * FROM tipo_usuario;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAllBanco_Destino`(id_banco_Destino int)
+BEGIN
+	select * from banco where nome not in (select nome from banco where id = id_banco_Destino);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAllBanco_Origem`(id_banco_origem int)
+BEGIN
+	select * from banco where nome not in (select nome from banco where id = id_banco_origem);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAllForma_Pagamento`(id_Forma_Pagamento int)
+BEGIN
+	select * from forma_pagamento where nome not in (select nome from forma_pagamento where id = id_Forma_Pagamento);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAllMoeda`(id_Tipo_Moeda int)
+BEGIN
+	select * from tipo_moeda where nome not in (select nome from tipo_moeda where id = id_Tipo_Moeda);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnAllTipo_Transacao`(id_tp_transacao int)
+BEGIN
+	select * from tipo_transacao where nome not in (select nome from tipo_transacao where id = id_tp_transacao);
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnOne_Banco`(id_banco int)
+BEGIN
+	SELECT * FROM banco
+    where id = id_banco;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnOne_Categoria`(id_categoria int)
+BEGIN
+	SELECT * FROM categoria
+    where id = id_categoria;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnOne_Forma_Pagamento`(id_forma_pagamento int)
+BEGIN
+	SELECT * FROM forma_pagamento
+    where id = id_forma_pagamento;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnOne_Operacao`(id_operacao int)
+BEGIN
+	SELECT * FROM operacao
+    where id = id_operacao;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnOne_Tipo_Moeda`(id_tipo_moeda int)
+BEGIN
+	SELECT * FROM tipo_moeda
+    where id = id_tipo_moeda;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnOne_Tipo_Transacao`(id_tipo_transacao int)
+BEGIN
+	SELECT * FROM tipo_transacao
+    where id = id_tipo_transacao;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnOne_Tipo_Usuario`(id_tipo_usuario int)
+BEGIN
+	SELECT * FROM tipo_usuario
+    where id = id_tipo_usuario;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ReturnOneTransacao`(id_transacao int)
+BEGIN
+Select 
+       transacao.id,
+       transacao.Usuario_id,
+	   usuario.nome as nome_usuario,
+       
+       transacao.Tipo_transacao_id,       
+       tipo_transacao.nome as nome_tipo_transacao,
+       
+       transacao.Banco_origem_id,
+       a.nome as nome_banco_origem,
+       
+       transacao.Banco_destino_id,
+       b.nome as nome_banco_destino,
+       
+       transacao.Forma_pagamento_id,
+       forma_pagamento.nome as nome_forma_pagamento,
+       
+       transacao.Tipo_moeda_id,
+       tipo_moeda.nome as nome_tipo_moeda,
+       
+        transacao.Categoria_id,
+       categoria.nome as Nome_Categoria,
+       
+       transacao.Valor,
+       transacao.Data,
+       transacao.descricao
+       from transacao 
+       JOIN usuario on transacao.usuario_id = usuario.id
+       JOIN tipo_transacao on transacao.tipo_transacao_id = tipo_transacao.id
+       LEFT JOIN banco a on a.id = banco_origem_id
+       LEFT JOIN banco b on b.id = banco_destino_id
+       JOIN forma_pagamento on forma_pagamento.id = forma_pagamento_id
+       JOIN tipo_moeda on tipo_moeda.id = transacao.Tipo_moeda_id
+       JOIN categoria on categoria.Id = transacao.Categoria_id
+       where transacao.id = id_transacao;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SaldoBancoPorUsuario`(IdUsuario int, IdBanco int)
+BEGIN
+IF (IdUsuario != '' || IdBanco != '') THEN
+select SUM(valor) from transacao
+where transacao.Usuario_id = IdUsuario AND transacao.Banco_destino_id = IdBanco
+GROUP by Usuario_id;
+
+ELSE
+SELECT 'O Id do usuário e banco deve ser fornecido para a verificar o saldo!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SaldoTotalUsuario`(IdUsuario int)
+BEGIN
+IF (IdUsuario != '') THEN
+select SUM(valor) from transacao
+where transacao.Usuario_id = IdUsuario
+GROUP by Usuario_id;
+
+ELSE
+SELECT 'O Id do usuário deve ser fornecido para a verificar o saldo total!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TransacoesUsuarioPorPeriodo`(IdUsuario int, dataInicial DATETIME, dataFinal DATETIME)
+BEGIN
+IF (IdUsuario != '' && dataInicial != '' && dataFinal != '') THEN
+select * from transacao
+where transacao.Usuario_id = IdUsuario
+AND transacao.Data >= dataInicial and transacao.Data <= dataFinal;
+
+ELSE
+SELECT 'O Id do usuário, data inicial e data final devem ser fornecidas para a verificar o saldo total!' AS Msg;
+END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TransacoesUsuarioPorPeriodoPorBanco`(IdUsuario int, IdBanco int, dataInicial DATETIME, dataFinal DATETIME)
+BEGIN
+	IF (IdUsuario != '' && dataInicial != '' && dataFinal != '' && IdBanco != '') THEN
+		select * from transacao
+		where transacao.Usuario_id = IdUsuario
+		AND transacao.Banco_destino_id = IdBanco
+		AND transacao.Data >= dataInicial 
+		and transacao.Data <= dataFinal;
+
+	ELSE
+		SELECT 'O Id do usuário, id do Banco, data inicial e data final devem ser fornecidas para a verificar o saldo total!' AS Msg;
+	END IF; 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Update_Banco`(id_banco int, nome_banco varchar(255))
+BEGIN
+	update banco
+    set Nome = nome_banco
+    where Id = id_banco;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Update_Forma_Pagamento`(id_forma_pagamento int, nome_forma_pagamento varchar(255))
+BEGIN
+	update forma_pagamento
+    set Nome = nome_forma_pagamento
+    where Id = id_forma_pagamento;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Update_Operacao`(id_operacao int, nome_operacao varchar(255))
+BEGIN
+	update operacao
+    set Nome = nome_operacao
+    where Id = id_operacao;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Update_Tipo_Moeda`(id_tipo_moeda int, nome_tipo_moeda varchar(255))
+BEGIN
+	update tipo_moeda
+    set Nome = nome_tipo_moeda
+    where Id = id_tipo_moeda;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Update_Tipo_Transacao`(id_tipo_transacao int, nome_tipo_transacao varchar(255))
+BEGIN
+	update tipo_transacao
+    set Nome = nome_tipo_transacao
+    where Id = id_tipo_transacao;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Update_Tipo_Usuario`(id_tipo_usuario int, nome_tipo_usuario varchar(255))
+BEGIN
+	update tipo_usuario
+    set Nome = nome_tipo_usuario
+    where Id = id_tipo_usuario;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Update_Transacao`(Transacao_Id int, Usuario_Id int,Tipo_Transacao_Id_upd int, Banco_Origem_Id_upd int, Banco_Destino_Id_upd int, Forma_Pagamento_Id_upd int,
+ Tipo_Moeda_upd int, Valor_upd decimal(8,2), Data_upd Date, Descricao_upd varchar(255), Categoria_id_upd int )
+BEGIN
+UPDATE transacao
+SET Tipo_transacao_id = Tipo_Transacao_Id_upd,
+     Banco_origem_id = Banco_Origem_Id_upd,
+     Banco_destino_id = Banco_Destino_Id_upd,
+     Forma_pagamento_id = Forma_Pagamento_Id_upd,
+     Tipo_moeda_id = Tipo_Moeda_upd,
+     Valor = Valor_upd,
+     Data = Data_upd,
+     Descricao = Descricao_upd,
+     Categoria_id = Categoria_id_upd
+WHERE
+	id = Transacao_Id AND Usuario_id = Usuario_Id;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `VerificaLoginESenha`(_login VARCHAR(255))
+BEGIN
+	SELECT login, senha FROM usuario
+		WHERE login = _login;
+	
+  -- IF ((_login != '')) THEN
+    -- IF(EXISTS(select 1 from usuario where login = _login) THEN
+      -- SELECT  senha AS Msg;
+    -- ELSE
+      -- SELECT 'Usuario e senha não coincidem' AS Msg;
+    -- END IF;
+  -- ELSE
+    -- SELECT 'Insira um login e senha válidos!' AS Msg;
+  -- END IF;
+END$$
+DELIMITER ;

@@ -8,28 +8,27 @@ $Id_Transacao_Update = $_POST['id_transacao'];
 $id_usuario = isset($_SESSION['id_user'])? $_SESSION['id_user']: NULL;
 
 $Tipo_Transacao_Update = isset($_POST['Tipo_Transacao']) ? $_POST['Tipo_Transacao']: '';
-$Banco_Origem_Update = isset($_POST['Banco_Origem']) ? $_POST['Banco_Origem']: '';
+$Banco_Origem_Update = isset($_POST['Banco_Origem']) ? $_POST['Banco_Origem']: 'null';
 $Banco_Destino_Update = isset($_POST['Banco_Destino']) ? $_POST['Banco_Destino']: '';
 $Formas_Pagamento_Update = isset($_POST['Forma_Pagamento']) ? $_POST['Forma_Pagamento']: '';
 $Tipo_Moeda_Update = isset($_POST['Moeda']) ? $_POST['Moeda']: '';
 $Valor_Update = isset($_POST['Valor']) ? $_POST['Valor']: '';
 $Data_Update = isset($_POST['Data']) ? $_POST['Data']: '';
-$Descricao_Update = isset($_POST['Descricao']) ? $_POST['Descricao']: '';
-
+$Descricao_Update = isset($_POST['Descricao']) ? $_POST['Descricao']: 'null';
+$Categoria = isset($_POST['Categoria']) ? $_POST['Categoria']: '';
+print_r($_POST);
 try{
-    $stmt = $conn->prepare("CALL Update_Transacao(?, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
+    $stmt = $conn->prepare("CALL Update_Transacao(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
     $stmt->bindParam(1, $Id_Transacao_Update, PDO::PARAM_STR);
     $stmt->bindParam(2, $id_usuario, PDO::PARAM_INT);
     $stmt->bindParam(3, $Tipo_Transacao_Update, PDO::PARAM_INT);
 
     if($Banco_Origem_Update <> "null") {
-        echo "entrou ori";
         $stmt->bindParam(4, $Banco_Origem_Update, PDO::PARAM_STR);
     }else{
         $stmt->bindValue(4, NULL, PDO::PARAM_NULL);
     }
     if($Banco_Destino_Update <> "null") {
-        echo "entrou dest";
         $stmt->bindParam(5, $Banco_Destino_Update, PDO::PARAM_STR);
     }else{
         $stmt->bindValue(5, NULL, PDO::PARAM_NULL);
@@ -43,7 +42,9 @@ try{
         $stmt->bindParam(10, $Descricao_Update, PDO::PARAM_STR);
     }else{
         $stmt->bindValue(10, NULL, PDO::PARAM_NULL);
-    }$stmt->execute();
+    }
+    $stmt->bindParam(11, $Categoria, PDO::PARAM_INT);
+    $stmt->execute();
 
     header("location:Index.php");
 }catch(PDOException $e){

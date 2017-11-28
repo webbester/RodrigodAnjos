@@ -50,6 +50,24 @@
                 </select>
             </td>
         </tr>
+        <tr><td colspan="5">Categoria</td></tr>
+        <tr>
+            <td colspan="4">
+                <select name="Categoria" id="select_tans" required="">
+                    <option value=""></option>
+                    <?php
+                    $stmt1 = $conn->prepare("CALL ReturnAll_Categoria(?)");
+                    $stmt1->bindParam(1,$row['Categoria_id'], PDO::PARAM_STR);
+                    $stmt1->execute();
+                    while($linha = $stmt1->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                        <option value="<?php echo "{$linha['Id']}" ?>"><?php echo "{$linha['Nome']}" ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+            </td>
+        </tr>
         <tr>
             <td colspan="2">Banco Origem</td>
             <td colspan="2">Banco Destino</td>

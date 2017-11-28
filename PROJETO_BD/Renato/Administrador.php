@@ -24,19 +24,20 @@
             <a href="Nova_Transacao.php">Nova Transação</a>
             <a href="#">Relatorios</a>
             <a href="Administrador.php">Administrador</a>
+            <a href="/Estudo Dirigido Banco de dados/Administrador/ReadBanco.php">Cadastrar Banco</a>
             <a href="Sair.php">Sair</a>
         </div>
     </nav>
-        <div id="transacoes">
-            <?php
-            $stmt = $conn->prepare("CALL Listar_Todas_Transacao(?)");
-            $stmt->bindParam(1,$_SESSION['id_user'], PDO::PARAM_INT);
-            $stmt->execute();
-            $ReturnTrans = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $stmt->closeCursor();
-            foreach ($ReturnTrans as $row){
-                ?>
-                <fieldset>
+    <div id="transacoes">
+        <?php
+        $stmt = $conn->prepare("CALL Listar_Todas_Transacao(?)");
+        $stmt->bindParam(1,$_SESSION['id_user'], PDO::PARAM_INT);
+        $stmt->execute();
+        $ReturnTrans = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        foreach ($ReturnTrans as $row){
+            ?>
+            <fieldset>
 
                 <table cellpadding="8" cellspacing="8" align="center">
                     <form name="Transacao" action="Update_transacao.php" method="post">
@@ -49,24 +50,6 @@
                                     <?php
                                     $stmt1 = $conn->prepare("CALL ReturnAllTipo_Transacao(?)");
                                     $stmt1->bindParam(1,$row['Tipo_transacao_id'], PDO::PARAM_STR);
-                                    $stmt1->execute();
-                                    while($linha = $stmt1->fetch(PDO::FETCH_ASSOC)) {
-                                        ?>
-                                        <option value="<?php echo "{$linha['Id']}" ?>"><?php echo "{$linha['Nome']}" ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr><td colspan="5">Categoria</td></tr>
-                        <tr>
-                            <td colspan="4">
-                                <select name="Categoria" id="select_tans">
-                                    <option value="<?php echo $row['Categoria_id']?>"><?php echo $row['Nome_Categoria']?></option>
-                                    <?php
-                                    $stmt1 = $conn->prepare("CALL ReturnAll_Categoria(?)");
-                                    $stmt1->bindParam(1,$row['Categoria_id'], PDO::PARAM_STR);
                                     $stmt1->execute();
                                     while($linha = $stmt1->fetch(PDO::FETCH_ASSOC)) {
                                         ?>
@@ -172,9 +155,9 @@
 
                     </form>
                 </table>
-                </fieldset>
-            <?php } ?>
-        </div>
+            </fieldset>
+        <?php } ?>
     </div>
+</div>
 </body>
 </html>

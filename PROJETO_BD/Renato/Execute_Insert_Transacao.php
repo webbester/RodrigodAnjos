@@ -13,9 +13,12 @@
 		$Valor = isset($_POST['Valor']) ? $_POST['Valor']: NULL;
 		$Data = isset($_POST['Data']) ? $_POST['Data']: NULL;
         $Descricao = isset($_POST['Descricao']) ? $_POST['Descricao']: NULL;
+        $Categoria = isset($_POST['Categoria']) ? $_POST['Categoria']: NULL;
+
+        echo $Categoria;
 
 		try {
-            $stmt = $conn->prepare("CALL Insert_Transacao(?, ?, ?, ?, ?, ?, ?, ?, ? )");
+            $stmt = $conn->prepare("CALL Insert_Transacao(?, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
             $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_INT);
             $stmt->bindParam(2, $Tipo_Transacao, PDO::PARAM_INT);
             if ($Banco_Origem == NULL) {
@@ -37,6 +40,7 @@
             } else {
                 $stmt->bindParam(9, $Descricao, PDO::PARAM_STR);
             }
+            $stmt->bindParam(10, $Categoria, PDO::PARAM_INT);
             $stmt->execute();
 
             header("location:Index.php");
